@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,7 +51,8 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="441dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/etpLoginContra"
@@ -63,18 +65,58 @@
             android:layout_marginTop="299dp"
             android:layout_marginEnd="11dp"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@android:color/black" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btnLoginMostOcult"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="351dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="332dp" />
+            android:layout_marginBottom="332dp"
+            android:background="@drawable/ic_visibility_24px" />
+
+        <Button
+            android:id="@+id/btnLoginRegistrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="465dp"
+            android:layout_marginBottom="216dp"
+            android:text="Registrar"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btnLoginLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="464dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="217dp"
+            android:text="Login"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="142dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="141dp"
+            tools:src="@tools:sample/avatars" />
 
     </RelativeLayout>
 </FrameLayout>
