@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvLoginUsu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginEnd="251dp"
+            android:layout_marginBottom="447dp"
+            android:text="Usuario: "
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="27sp" />
+
+        <TextView
+            android:id="@+id/tvLoginContra"
+            android:layout_width="173dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="215dp"
+            android:layout_marginBottom="390dp"
+            android:text="Contraseña: "
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="27sp" />
+
+        <EditText
+            android:id="@+id/etLoginUsu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="245dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="441dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etpLoginContra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="187dp"
+            android:layout_marginTop="299dp"
+            android:layout_marginEnd="11dp"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="351dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="332dp" />
+
+    </RelativeLayout>
+</FrameLayout>
