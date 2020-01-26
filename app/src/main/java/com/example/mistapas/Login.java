@@ -6,11 +6,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -28,9 +32,12 @@ public class Login extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private EditText usuario,contraseña;
-    private Button mostrarContr, registrar, login;
-    private View vista;
+    EditText usuario,contraseña;
+    Button mostrarContr, registrar, login;
+    View vista;
+    RelativeLayout relativeLayout;
+    private boolean esVisible;
+    ImageView imagen;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,12 +80,38 @@ public class Login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         vista=inflater.inflate(R.layout.fragment_login, container, false);
-        // Inflate the layout for this fragment
+        iniciarVista(vista);
         return vista;
     }
 
     public void iniciarVista(View vista){
-        usuario=vista.findViewById(R.id.etLoginUsu);
+
+        usuario=(EditText)vista.findViewById(R.id.etLoginUsu);
+        contraseña=(EditText)vista.findViewById(R.id.etpLoginContra);
+        mostrarContr=(Button) vista.findViewById(R.id.btnLoginMostOcult);
+        registrar=(Button)vista.findViewById(R.id.btnLoginRegistrar);
+        login=(Button)vista.findViewById(R.id.btnLoginLogin);
+        imagen=(ImageView)vista.findViewById(R.id.imageView);
+
+        mostrarContr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!esVisible) {
+                    contraseña.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    esVisible = true;
+                    mostrarContr.setBackgroundResource(R.drawable.ic_visibility_24px);
+                    ///aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
+                }
+                else {
+                    contraseña.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    esVisible = false;
+                    mostrarContr.setBackgroundResource(R.drawable.ic_visibility_off_24px);
+                    ///aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
+                }
+            }
+        });
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -88,22 +121,9 @@ public class Login extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
