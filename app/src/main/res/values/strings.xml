@@ -2,5 +2,11 @@
     <string name="app_name">MisTapas</string>
     <string name="title_home">Home</string>
     <string name="title_mapa">Mapa</string>
+    <string name="registro_tittle">Registro</string>
+    <string name="registro_user">Usuario:</string>
+    <string name="registro_email">Email:</string>
+    <string name="registro_pass">Contraseña:</string>
+    <string name="registro_confirmpass">Confirmar Contraseña:</string>
+    <string name="registro_nombre">Nombre:</string>
     <string name="title_lista">Lista de Bares</string>
 </resources>
