@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 public interface MisTapasRest {
     //Obtenemos todos los resultados
     // GET: http://80.102.108.57:5555/app/usuarios
-    @GET("app/usuarios")
+    @GET("usuarios")
     Call<List<Usuario>> findALl();
 
     //Obtener usuario
