@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_mapa"
-        android:name="com.example.mistapas.ui.mapa.DashboardFragment"
+        android:name="com.example.mistapas.ui.mapa.MapaFragment"
         android:label="@string/title_mapa"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_mapa" />
 
     <fragment
         android:id="@+id/navigation_lista"
