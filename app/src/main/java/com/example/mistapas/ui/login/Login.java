@@ -1,4 +1,4 @@
-package com.example.mistapas;
+package com.example.mistapas.ui.login;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.example.mistapas.R;
 
 
 /**
