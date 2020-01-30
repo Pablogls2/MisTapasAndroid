@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        tools:context=".ui.login.Login">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="184dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.383"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tvLoginContra"
+                android:layout_width="133dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="60dp"
+                android:text="Contraseña: "
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toStartOf="@+id/etpLoginContra"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLoginUsu" />
+
+            <EditText
+                android:id="@+id/etpLoginContra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="156dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginUsu" />
+
+            <Button
+                android:id="@+id/btnLoginLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="84dp"
+                android:text="Login"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.694"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etpLoginContra" />
+
+            <TextView
+                android:id="@+id/tvLoginUsu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="80dp"
+                android:text="Usuario: "
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toStartOf="@+id/etLoginUsu"
+                app:layout_constraintHorizontal_bias="0.286"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
+
+            <Button
+                android:id="@+id/btnLoginRegistrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                android:text="Registrar"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.364"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLoginContra" />
+
+            <EditText
+                android:id="@+id/etLoginUsu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                android:layout_marginEnd="156dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
+
+            <Button
+                android:id="@+id/btnLoginMostOcult"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/ic_visibility_24px"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.792"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etpLoginContra" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
