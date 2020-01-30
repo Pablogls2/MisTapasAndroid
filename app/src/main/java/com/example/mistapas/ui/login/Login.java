@@ -244,7 +244,7 @@ public class Login extends Fragment {
     }
 
     private void buscarUsuario(){
-        Call<Usuario> call = misTapasRest.findUser("a","a");
+        Call<Usuario> call = misTapasRest.findUser(etLoginUser.getText().toString(),etLoginPass.getText().toString());
         Toast toast = Toast.makeText(getContext(), "hola", Toast.LENGTH_LONG);
         //toast.show();
         Log.e("cosa","a");
