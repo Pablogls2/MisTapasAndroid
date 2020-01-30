@@ -12,7 +12,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     //BDEjemplo, con una sóla tabla llamada Data
 
     //Sentencia SQL para crear la tabla de de almacenamiento
-    String sqlCreate = "CREATE TABLE Login (id INTEGER PRIMARY KEY AUTOINCREMENT,usuario TEXT,token TEXT, id_disp TEXT)";
+    String sqlCreate = "CREATE TABLE Login (id_disp TEXT PRIMARY KEY ,token TEXT)";
 
 
     public BaseDeDatos(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {

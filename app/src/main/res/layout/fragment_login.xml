@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/etpLoginContra" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imgLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -81,7 +81,7 @@
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
 
             <TextView
                 android:id="@+id/tvLoginUsu"
@@ -95,7 +95,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/etLoginUsu"
                 app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
 
             <Button
                 android:id="@+id/btnLoginRegistrar"

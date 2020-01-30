@@ -1,6 +1,5 @@
 package com.example.mistapas;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 
 /**
@@ -91,7 +89,7 @@ public class Login extends Fragment {
         mostrarContr=(Button) vista.findViewById(R.id.btnLoginMostOcult);
         registrar=(Button)vista.findViewById(R.id.btnLoginRegistrar);
         login=(Button)vista.findViewById(R.id.btnLoginLogin);
-        imagen=(ImageView)vista.findViewById(R.id.imageView);
+        imagen=(ImageView)vista.findViewById(R.id.imgLogin);
 
         mostrarContr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +106,20 @@ public class Login extends Fragment {
                     mostrarContr.setBackgroundResource(R.drawable.ic_visibility_off_24px);
                     ///aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
                 }
+
+
             }
         });
+
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
 
 
     }
