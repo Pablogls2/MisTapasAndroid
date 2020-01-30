@@ -7,15 +7,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 
-public class BaseDeDatos extends SQLiteOpenHelper {
+public class BdControllerLogin extends SQLiteOpenHelper {
 
     //BDEjemplo, con una sóla tabla llamada Data
 
     //Sentencia SQL para crear la tabla de de almacenamiento
-    String sqlCreate = "CREATE TABLE Login (id_disp TEXT PRIMARY KEY ,token TEXT)";
+    String sqlCreate = "CREATE TABLE Login (id_disp TEXT PRIMARY KEY ,configuracion TEXT)";
 
 
-    public BaseDeDatos(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public BdControllerLogin(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 

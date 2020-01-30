@@ -3,4 +3,5 @@
     <string name="title_home">Home</string>
     <string name="title_mapa">Mapa</string>
     <string name="title_lista">Lista de Bares</string>
+    <string name="login_entrar">Login</string>
 </resources>

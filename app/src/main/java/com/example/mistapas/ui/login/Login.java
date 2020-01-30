@@ -1,8 +1,12 @@
 package com.example.mistapas.ui.login;
 
-import android.net.Uri;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import android.util.Log;
+import android.widget.*;
 import androidx.fragment.app.Fragment;
 
 import android.text.method.HideReturnsTransformationMethod;
@@ -10,102 +14,76 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.example.mistapas.R;
+import com.example.mistapas.ui.modelos.Usuario;
+import com.example.mistapas.ui.rest.ApiUtils;
+import com.example.mistapas.ui.rest.MisTapasRest;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Login.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Login#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Login extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    EditText usuario,contraseña;
-    Button mostrarContr, registrar, login;
-    View vista;
+    EditText etLoginUser, etLoginPass;
+    Button btnLoginMostrarPass, btnLoginRegistro, btnLoginEntrar;
     RelativeLayout relativeLayout;
     private boolean esVisible;
     ImageView imagen;
+    private MisTapasRest misTapasRest;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
 
     public Login() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Login.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Login newInstance(String param1, String param2) {
-        Login fragment = new Login();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista=inflater.inflate(R.layout.fragment_login, container, false);
-        iniciarVista(vista);
-        return vista;
+        View root=inflater.inflate(R.layout.fragment_login, container, false);
+        iniciarVista(root);
+        return root;
     }
 
     public void iniciarVista(View vista){
 
-        usuario=(EditText)vista.findViewById(R.id.etLoginUsu);
-        contraseña=(EditText)vista.findViewById(R.id.etpLoginContra);
-        mostrarContr=(Button) vista.findViewById(R.id.btnLoginMostOcult);
-        registrar=(Button)vista.findViewById(R.id.btnLoginRegistrar);
-        login=(Button)vista.findViewById(R.id.btnLoginLogin);
+        etLoginUser =(EditText)vista.findViewById(R.id.etLoginUsu);
+        etLoginPass =(EditText)vista.findViewById(R.id.etpLoginContra);
+        btnLoginMostrarPass =(Button) vista.findViewById(R.id.btnLoginMostOcult);
+        btnLoginRegistro =(Button)vista.findViewById(R.id.btnLoginRegistrar);
+        btnLoginEntrar =(Button)vista.findViewById(R.id.btnLoginLogin);
         imagen=(ImageView)vista.findViewById(R.id.imgLogin);
 
-        mostrarContr.setOnClickListener(new View.OnClickListener() {
+        // Iniciamos la API REST
+        if(isNetworkAvailable()) {
+            misTapasRest = ApiUtils.getService();
+        }else{
+            Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+        }
+
+        btnLoginMostrarPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!esVisible) {
-                    contraseña.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    etLoginPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     esVisible = true;
-                    mostrarContr.setBackgroundResource(R.drawable.ic_visibility_24px);
+                    btnLoginMostrarPass.setBackgroundResource(R.drawable.ic_visibility_24px);
                     ///aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
                 }
                 else {
-                    contraseña.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    etLoginPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     esVisible = false;
-                    mostrarContr.setBackgroundResource(R.drawable.ic_visibility_off_24px);
+                    btnLoginMostrarPass.setBackgroundResource(R.drawable.ic_visibility_off_24px);
                     ///aqui puedes cambiar el texto del boton, o textview, o cambiar la imagen de un imageView.
                 }
 
@@ -113,42 +91,37 @@ public class Login extends Fragment {
             }
         });
 
-
-        login.setOnClickListener(new View.OnClickListener() {
+        btnLoginEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                buscarUsuario();
             }
         });
-
-
-
-
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService
+                (Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    private void buscarUsuario(){
+        Call<Usuario> call = misTapasRest.findUser("pablogls2","superman1");
+        Log.e("Error","a"+call.toString());
+        call.enqueue(new Callback<Usuario>() {
+                @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(),"Correcto",Toast.LENGTH_SHORT);
+                }
+            }
 
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Toast.makeText(getContext(),"inCorrecto",Toast.LENGTH_SHORT);
+            }
+        });
     }
 }
