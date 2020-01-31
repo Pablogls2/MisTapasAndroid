@@ -44,129 +44,6 @@ public class Login extends Fragment {
     ImageView imagen;
     private MisTapasRest misTapasRest;
 
-    List lista= new List() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(@Nullable Object o) {
-            return false;
-        }
-
-        @NonNull
-        @Override
-        public Iterator iterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @NonNull
-        @Override
-        public Object[] toArray(@NonNull Object[] a) {
-            return new Object[0];
-        }
-
-        @Override
-        public boolean add(Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(@Nullable Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(@NonNull Collection c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(@NonNull Collection c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(int index, @NonNull Collection c) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(@NonNull Collection c) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(@NonNull Collection c) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public Object get(int index) {
-            return null;
-        }
-
-        @Override
-        public Object set(int index, Object element) {
-            return null;
-        }
-
-        @Override
-        public void add(int index, Object element) {
-
-        }
-
-        @Override
-        public Object remove(int index) {
-            return null;
-        }
-
-        @Override
-        public int indexOf(@Nullable Object o) {
-            return 0;
-        }
-
-        @Override
-        public int lastIndexOf(@Nullable Object o) {
-            return 0;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator listIterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator listIterator(int index) {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public List subList(int fromIndex, int toIndex) {
-            return null;
-        }
-    };
-
     public Login() {
         // Required empty public constructor
     }
@@ -252,8 +129,14 @@ public class Login extends Fragment {
                 @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(getContext(),"Correcto",Toast.LENGTH_SHORT).show();
-                    Log.e("bien","aaaaaa");
+                    Usuario user = response.body();
+                    if(user != null){
+                            Toast.makeText(getContext(),"Bienvenido: "+user.getNombre(),Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getContext(), "No existe el usuario, registre por favor", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(getContext(),"Por favor introduce datos ",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -264,25 +147,6 @@ public class Login extends Fragment {
             }
         });
     }
-    /*private void listarProductos() {
-// Creamos la tarea que llamará al servicio rest y la encolamos
-        Call<List<Usuario>> call = misTapasRest.findALl();
-        call.enqueue(new Callback<List<Usuario>>() {
-            @Override
-            public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                if(response.isSuccessful()){
-// Si tienes exito nos quedamos con el ResponseBody, listado en JSON
-// Nos hace el pasrser automáticamente
-                    lista = response.body();
-                    //listView.setAdapter(new ProductosAdapter(MainActivity.this, R.layout.list_productos, list));
-                }
-            }
-            @Override
-            public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                Log.e("ERROR: ", t.getMessage());
-            }
-        });
-    }*/
 
 
 
