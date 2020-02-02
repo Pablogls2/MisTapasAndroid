@@ -1,9 +1,7 @@
 package com.example.mistapas.ui.mapa;
 
 import android.Manifest;
-import android.content.Context;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -68,13 +66,16 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
+    /**
+     * Con este método iniciamos el mapa
+     */
     private void iniciarMapa() {
         Posicion = LocationServices.getFusedLocationProviderClient(getActivity());
         FragmentManager fm = getChildFragmentManager();
-        supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.contenedorMapa);
+        supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.contenedorTapasMapa);
         if (supportMapFragment == null) {
             supportMapFragment = SupportMapFragment.newInstance();
-            fm.beginTransaction().replace(R.id.contenedorMapa, supportMapFragment).commit();
+            fm.beginTransaction().replace(R.id.contenedorTapasMapa, supportMapFragment).commit();
         }
         supportMapFragment.getMapAsync(this);
     }
@@ -93,6 +94,10 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback,
         obtenerPosicionActual();
     }
 
+
+    /**
+     * Con este método comprobamos q los permisos están otorgados, si no es asi se los pedirá al usuario
+     */
     private void pedirMultiplesPermisos(){
         // Indicamos el permisos y el manejador de eventos de los mismos
         Dexter.withActivity(getActivity())
@@ -133,7 +138,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback,
     }
 
     private void MostrarMapa() {
-        //pedirMultiplesPermisos();
         mapa.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mapa.setMinZoomPreference(15.0f);
         mapa.setOnMarkerClickListener(this);
@@ -150,6 +154,10 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback,
         uiSettings.setCompassEnabled(false);
     }
 
+
+    /**
+     * Obtenemos la posición acutal
+     */
     private void obtenerPosicionActual() {
         try {
 
@@ -196,6 +204,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback,
 
 
     }
+
+    
     private void situarCamara() {
         mapa.moveCamera(CameraUpdateFactory.newLatLng(posicionActual));
     }
