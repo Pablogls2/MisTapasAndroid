@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/fondo"
         tools:context=".ui.login.ActividadLogin">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,12 +60,15 @@
                 android:layout_marginTop="16dp"
                 android:text="Login"
                 android:textSize="16sp"
+                android:background="@drawable/btn2"
+                android:textColor="@drawable/boton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.601"
                 app:layout_constraintStart_toStartOf="parent"
+                android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/etpLoginContra" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgLogin"
                 android:layout_width="41dp"
                 android:layout_height="41dp"
@@ -107,12 +111,15 @@
 
             <Button
                 android:id="@+id/btnLoginRegistrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="103dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="22dp"
+                android:background="@drawable/btn2"
                 android:text="Registrar"
+                android:textColor="@drawable/boton"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textStyle="bold"
                 app:layout_constraintHorizontal_bias="0.357"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLoginContra" />
