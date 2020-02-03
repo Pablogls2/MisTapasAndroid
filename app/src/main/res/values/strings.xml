@@ -10,4 +10,6 @@
     <string name="registro_nombre">Nombre:</string>
     <string name="title_lista">Lista de Bares</string>
     <string name="login_entrar">Login</string>
+    <string name="aceptar_registrar">Registrar</string>
+    <string name="volver_registrar">Volver</string>
 </resources>

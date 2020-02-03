@@ -4,7 +4,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recyclerViewLoginLogin"
+    android:id="@+id/relativeLayoutLoginLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
@@ -27,18 +27,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.6"/>
+
         <TextView
-                android:id="@+id/tvLoginContra"
-                android:layout_width="150dp"
-                android:layout_height="41dp"
-                android:text="Contraseña: "
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.523"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.061"/>
+            android:id="@+id/tvLoginContra"
+            android:layout_width="150dp"
+            android:layout_height="41dp"
+            android:text="Contraseña: "
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
+
         <EditText
                 android:id="@+id/etpLoginContra"
                 android:layout_width="210dp"

@@ -4,7 +4,21 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/fondo"
         tools:context=".ui.registro.RegistroFragment" android:id="@+id/cntRegistroConstraint">
+
+    <Button
+        android:id="@+id/btnRegistroMostOcult"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_visibility_24px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.766" />
+
     <EditText
             android:layout_width="205dp"
             android:layout_height="41dp"
@@ -84,32 +98,64 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0.572" app:layout_constraintVertical_bias="0.239"/>
+
     <EditText
-            android:layout_width="198dp"
-            android:layout_height="37dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/etRegistroPass"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="376dp"
-            app:layout_constraintHorizontal_bias="0.553" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.0"/>
+        android:id="@+id/etRegistroPass"
+        android:layout_width="198dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="310dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
-            android:layout_width="198dp"
-            android:layout_height="37dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/etRegistroConfirm"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="376dp"
-            app:layout_constraintHorizontal_bias="0.553" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.292"/>
+        android:id="@+id/etRegistroConfirm"
+        android:layout_width="198dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="310dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.292" />
+
     <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.445"
-            app:layout_constraintVertical_bias="0.901"/>
+        android:id="@+id/btnRegistroRegistrar"
+        android:layout_width="105dp"
+        android:layout_height="45dp"
+        android:background="@drawable/btn2"
+        android:text="@string/aceptar_registrar"
+        android:textColor="@drawable/boton"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906" />
+
+    <Button
+        android:id="@+id/btnRegistroVolver"
+        android:layout_width="105dp"
+        android:layout_height="45dp"
+        android:background="@drawable/btn2"
+        android:text="@string/volver_registrar"
+        android:textColor="@drawable/boton"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906" />
 </androidx.constraintlayout.widget.ConstraintLayout>

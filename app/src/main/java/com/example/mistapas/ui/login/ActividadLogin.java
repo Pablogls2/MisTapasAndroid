@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import com.example.mistapas.MainActivity;
 import com.example.mistapas.R;
 import com.example.mistapas.ui.modelos.Usuario;
+import com.example.mistapas.ui.registro.RegistroActivity;
 import com.example.mistapas.ui.rest.ApiUtils;
 import com.example.mistapas.ui.rest.MisTapasRest;
 
@@ -41,6 +42,7 @@ import retrofit2.Response;
 
 public class ActividadLogin extends AppCompatActivity {
 
+    View v;
     EditText etLoginUser, etLoginPass;
     Button btnLoginMostrarPass, btnLoginRegistro, btnLoginEntrar;
     RelativeLayout relativeLayout;
@@ -103,6 +105,16 @@ public class ActividadLogin extends AppCompatActivity {
                /* for (int i=0;i<lista.size();i++){
                     Log.e("HOLA","a"+lista.get(i));
                 }*/
+            }
+        });
+
+        btnLoginRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (getApplicationContext(), RegistroActivity.class);
+                startActivity(intent);
+
+
             }
         });
     }

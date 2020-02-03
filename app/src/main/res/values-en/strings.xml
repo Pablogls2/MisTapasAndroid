@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MisTapas</string>
+    <string name="registro_email">Email:</string>
+    <string name="registro_nombre">Name:</string>
+    <string name="registro_pass">Password:</string>
+    <string name="registro_tittle">Registration</string>
+    <string name="registro_user">User:</string>
+    <string name="title_home">Home</string>
+    <string name="title_mapa">Map</string>
+    <string name="login_entrar">Login</string>
+    <string name="registro_confirmpass">Confirm Password:</string>
+    <string name="aceptar_registrar">Register</string>
+    <string name="title_lista">Bar List</string>
+    <string name="volver_registrar">Back</string>
+</resources>
