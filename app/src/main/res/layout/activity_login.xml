@@ -1,66 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerViewLoginLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        tools:context=".ui.login.ActividadLogin">
+    android:background="@drawable/fondo"
+    tools:context=".ui.login.ActividadLogin">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp" android:layout_alignParentEnd="true" android:layout_marginEnd="0dp"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="0dp" android:layout_marginTop="0dp"
+            android:layout_alignParentTop="true" android:foregroundTint="#020EAA">
 
-            <Button
+        <Button
                 android:id="@+id/btnLoginMostOcult"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/ic_visibility_24px"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.955"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etpLoginContra" />
-
-            <TextView
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6"/>
+        <TextView
                 android:id="@+id/tvLoginContra"
-                android:layout_width="133dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="150dp"
+                android:layout_height="41dp"
                 android:text="Contraseña: "
-                android:textAlignment="textEnd"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toStartOf="@+id/etpLoginContra"
-                app:layout_constraintHorizontal_bias="0.734"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLoginUsu" />
-
-            <EditText
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.523"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.061"/>
+        <EditText
                 android:id="@+id/etpLoginContra"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_width="210dp"
+                android:layout_height="60dp"
                 android:ems="10"
                 android:inputType="textPassword"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etLoginUsu" />
-
-            <Button
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.919" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.52"
+                android:textSize="24sp" android:backgroundTint="#0347F4" android:foregroundTint="#020EAA"
+                android:textColorLink="#071E91" android:textColorHint="#071E91" android:textColorHighlight="#071E91"
+                android:shadowColor="#071E91"/>
+        <Button
                 android:id="@+id/btnLoginLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="88dp"
+                android:layout_width="117dp"
+                android:layout_height="67dp"
+                android:background="@drawable/btn2"
+                android:textColor="@drawable/boton"
                 android:text="Login"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.773"
+                app:layout_constraintHorizontal_bias="0.867"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etpLoginContra" />
-
-            <ImageView
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.743"/>
+        <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,44 +76,49 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@tools:sample/avatars"/>
 
-            <EditText
+        <EditText
                 android:id="@+id/etLoginUsu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="72dp"
+                android:layout_width="210dp"
+                android:layout_height="55dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
-
-            <TextView
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintVertical_bias="0.354" android:backgroundTint="#0347F4"
+                android:foregroundTint="#020EAA" android:textColorLink="#071E91" android:textColorHint="#071E91"
+                android:textColorHighlight="#071E91" android:shadowColor="#071E91"
+        />
+        <TextView
                 android:id="@+id/tvLoginUsu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_width="119dp"
+                android:layout_height="38dp"
                 android:text="Usuario: "
-                android:textAlignment="textEnd"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toStartOf="@+id/etLoginUsu"
-                app:layout_constraintHorizontal_bias="0.494"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
-
-            <Button
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.353" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.123"/>
+        <Button
                 android:id="@+id/btnLoginRegistrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_width="156dp"
+                android:layout_height="64dp"
                 android:text="Registrar"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.202"
+                app:layout_constraintHorizontal_bias="0.141"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLoginContra" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </RelativeLayout>
+                android:textColor="@drawable/boton"
+                android:background="@drawable/btn2"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.745"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
