@@ -1,6 +1,7 @@
 package com.example.mistapas.ui.login;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -73,6 +74,7 @@ public class Login extends Fragment {
         btnLoginEntrar =(Button)vista.findViewById(R.id.btnLoginLogin);
         imagen=(ImageView)vista.findViewById(R.id.imgLogin);
 
+
         // Iniciamos la API REST
         if(isNetworkAvailable()) {
             misTapasRest = ApiUtils.getService();
@@ -120,6 +122,8 @@ public class Login extends Fragment {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+
+
     private void buscarUsuario(){
         Call<Usuario> call = misTapasRest.findUser(etLoginUser.getText().toString(),etLoginPass.getText().toString());
         Toast toast = Toast.makeText(getContext(), "hola", Toast.LENGTH_LONG);
@@ -146,6 +150,7 @@ public class Login extends Fragment {
                 Log.e("ERROR: ", t.getMessage());
             }
         });
+
     }
 
 
