@@ -1,0 +1,7 @@
+<templateSet group="user">
+  <template name="getset" value="    def __getattrb(self):&#10;        return self.__attrb&#10;&#10;    def __setattrb(self, new):&#10;        self.__attrb = new&#10;        &#10;    attrb = property(fget=__getattrb,&#10;                     fset=__setattrb,&#10;                     doc=&quot;Soy la propiedad 'attrb'&quot;)" shortcut="TAB" description="añade geter y setter" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+</templateSet>
