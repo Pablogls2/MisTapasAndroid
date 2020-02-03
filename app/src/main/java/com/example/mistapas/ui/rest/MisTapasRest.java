@@ -23,7 +23,7 @@ public interface MisTapasRest {
 
     // Crear un producto
     //POST: http://localhost:8080/productos
-    @POST("registo")
+    @POST("registro")
     Call<Usuario> create(@Body Usuario user);
 
 }

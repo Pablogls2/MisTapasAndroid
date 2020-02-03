@@ -108,7 +108,7 @@ public class ActividadLogin extends AppCompatActivity {
         btnLoginRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(getActivity(), RegistroActivity.class);
+                Intent i= new Intent(getApplicationContext(), RegistroActivity.class);
                 startActivity(i);
             }
         });

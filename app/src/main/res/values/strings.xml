@@ -10,4 +10,7 @@
     <string name="registro_nombre">Nombre:</string>
     <string name="title_lista">Lista de Bares</string>
     <string name="login_entrar">Login</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="btnRegistroRegistrar">Registrar</string>
+    <string name="btnRegistroVolver">Volver</string>
 </resources>
