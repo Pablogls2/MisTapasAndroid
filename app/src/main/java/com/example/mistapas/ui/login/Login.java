@@ -1,6 +1,7 @@
 package com.example.mistapas.ui.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mistapas.R;
 import com.example.mistapas.ui.modelos.Usuario;
+import com.example.mistapas.ui.registro.RegistroActivity;
 import com.example.mistapas.ui.rest.ApiUtils;
 import com.example.mistapas.ui.rest.MisTapasRest;
 
@@ -108,6 +110,14 @@ public class Login extends Fragment {
                /* for (int i=0;i<lista.size();i++){
                     Log.e("HOLA","a"+lista.get(i));
                 }*/
+            }
+        });
+
+        btnLoginRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(getActivity(), RegistroActivity.class);
+                startActivity(i);
             }
         });
     }

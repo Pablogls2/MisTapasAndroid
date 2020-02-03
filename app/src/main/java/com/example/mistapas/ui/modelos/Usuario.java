@@ -39,6 +39,13 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(String nickname, String nombre, String email, String psw) {
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.email = email;
+        this.psw = psw;
+    }
+
     public int getId() {
         return id;
     }
