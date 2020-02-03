@@ -102,7 +102,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public  void iniciarVista(){
-        this.btnRegistroAceptar= findViewById(R.id.btnRegistroAceptar);
+        this.btnRegistroAceptar= findViewById(R.id.btnRegistroRegistrar);
         this.btnRegistroVolver= findViewById(R.id.btnRegistroVolver);
         this.etRegistroUsuario= findViewById(R.id.etRegistroUsuario);
         this.etRegistroEmail= findViewById(R.id.etRegistroEmail);
