@@ -1,6 +1,5 @@
 package com.example.mistapas.ui.registro;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +18,7 @@ public class RegistroFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root= inflater.inflate(R.layout.registro_fragment, container, false);
+        View root= inflater.inflate(R.layout.registro_activity, container, false);
 
         return root;
     }
