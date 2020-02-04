@@ -66,7 +66,6 @@ public class ActividadLogin extends AppCompatActivity {
         btnLoginMostrarPass =(Button) findViewById(R.id.btnLoginMostOcult);
         btnLoginRegistro =(Button)findViewById(R.id.btnLoginRegistrar);
         btnLoginEntrar =(Button)findViewById(R.id.btnLoginLogin);
-        imagen=(ImageView)findViewById(R.id.imgLogin);
 
 
         // Iniciamos la API REST
@@ -100,10 +99,6 @@ public class ActividadLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 buscarUsuario();
-                //listarProductos();
-               /* for (int i=0;i<lista.size();i++){
-                    Log.e("HOLA","a"+lista.get(i));
-                }*/
             }
         });
 
