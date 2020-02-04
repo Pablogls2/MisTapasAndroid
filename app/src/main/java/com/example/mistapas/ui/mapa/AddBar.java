@@ -31,7 +31,12 @@ import androidx.fragment.app.Fragment;
 
 
 import com.example.mistapas.R;
+import com.example.mistapas.ui.login.BdController;
+import com.example.mistapas.ui.modelos.Bar;
 import com.example.mistapas.ui.modelos.Usuario;
+import com.example.mistapas.ui.registro.RegistroActivity;
+import com.example.mistapas.ui.rest.ApiUtils;
+import com.example.mistapas.ui.rest.MisTapasRest;
 import com.google.android.gms.maps.model.LatLng;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -47,17 +52,21 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddBar extends Fragment {
 
     private ImageView ivAddImagen;
     private EditText etAddTitulo,etAddTapas;
     private Spinner  spAddSpinner;
     private static final String IMAGE_DIRECTORY = "/misTapas";
-    private Button btnJuegoAdd;
-    private Usuario user;
+    private Button btnMapaAdd;
     private String ruta;
     private String img;
     private Bitmap imagenTransformada;
+    MisTapasRest misTapasRest;
 
     private  Uri photoURI;
     View root;
@@ -75,6 +84,10 @@ public class AddBar extends Fragment {
         AddBar f = new AddBar();
         f.setArguments(b);
         return f;
+
+
+
+
     }
 
 
@@ -90,6 +103,7 @@ public class AddBar extends Fragment {
                              @Nullable Bundle savedInstanceState) {
          root = inflater.inflate(R.layout.fragment_add_bar, container, false);
 
+        misTapasRest = ApiUtils.getService();
         iniciarVista();
         Bundle b=getArguments();
         Double latitud=b.getDouble("latitud");
@@ -106,22 +120,47 @@ public class AddBar extends Fragment {
 
         setHasOptionsMenu(true);
         pedirMultiplesPermisos();
+
+
+        btnMapaAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etAddTitulo.getText().toString().isEmpty()|| etAddTapas.getText().toString().isEmpty()  || imagenTransformada == null) {
+                    Toast.makeText(getActivity(), "¡Por favor rellena todos los campos!", Toast.LENGTH_SHORT).show();
+                }else {
+                   int id= BdController.selectIdUser(getContext());
+                    Toast.makeText(getActivity(), "A"+id, Toast.LENGTH_SHORT).show();
+                      Bar b = new Bar(etAddTitulo.getText().toString(), latitud, longitud,spAddSpinner.getSelectedItem().toString().length(),etAddTapas.getText().toString(),bitmapToBase64(imagenTransformada),id);
+                       salvarBar(b);
+
+                    }
+                }
+
+        });
+
         return root;
     }
 
 
     public void iniciarVista(){
-       ivAddImagen= (ImageView) root.findViewById(R.id.ivAddImagen);
+        ivAddImagen= (ImageView) root.findViewById(R.id.ivAddImagen);
         etAddTitulo = root.findViewById(R.id.etAddNombre);
         etAddTapas=root.findViewById(R.id.etAddTapas);
         spAddSpinner= root.findViewById(R.id.spAddEstrellas);
-
+        btnMapaAdd=root.findViewById(R.id.btnMapaAdd);
         String[] estrellas = {"*","**", "***", "****", "*****"};
         spAddSpinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, estrellas));
 
     }
 
-
+    public static byte[] getBytesFromBitmap(Bitmap bitmap) {
+        if (bitmap!=null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+            return stream.toByteArray();
+        }
+        return null;
+    }
 
 
 
@@ -331,5 +370,29 @@ public class AddBar extends Fragment {
     }
 
 
+    private void salvarBar(Bar b) {
+        // Llamamos al metodo de crear
+
+        Call<Bar> call = misTapasRest.create(b);
+        call.enqueue(new Callback<Bar>() {
+
+            // Si todo ok
+            @Override
+            public void onResponse(Call<Bar> call, Response<Bar> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(), "Bar creado", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), response.toString() , Toast.LENGTH_LONG).show();
+                    Log.e("404","dd"+response.toString());
+                }
+            }
+
+            // Si error
+            @Override
+            public void onFailure(Call<Bar> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+            }
+        });
+    }
 
 }

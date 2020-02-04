@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Blob;
+
 public class Bar {
 
     //Campos
@@ -40,9 +42,24 @@ public class Bar {
     //imagen
     @SerializedName("imagen")
     @Expose
-    private Bitmap imagen;
+    private String imagen;
 
-    public Bar(String nombre, Double latitud, Double longitud, int estrellas, int idUsuario, Bitmap imagen) {
+    @SerializedName("imagen")
+    @Expose
+    private String tapas;
+
+    public Bar(String nombre, Double latitud, Double longitud, int estrellas,String tapas,String imagen ,int idUsuario ) {
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.estrellas = estrellas;
+        this.idUsuario = idUsuario;
+        this.imagen = imagen;
+        this.tapas=tapas;
+    }
+
+    public Bar(int id, String nombre, Double latitud, Double longitud, int estrellas, int idUsuario, String imagen) {
+        this.id = id;
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -51,14 +68,12 @@ public class Bar {
         this.imagen = imagen;
     }
 
-    public Bar(int id, String nombre, Double latitud, Double longitud, int estrellas, int idUsuario, Bitmap imagen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.estrellas = estrellas;
-        this.idUsuario = idUsuario;
-        this.imagen = imagen;
+    public String getTapas() {
+        return tapas;
+    }
+
+    public void setTapas(String tapas) {
+        this.tapas = tapas;
     }
 
     public int getId() {
@@ -109,11 +124,11 @@ public class Bar {
         this.idUsuario = idUsuario;
     }
 
-    public Bitmap getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(Bitmap imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 }
