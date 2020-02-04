@@ -17,4 +17,9 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="btnRegistroRegistrar">Registrar</string>
     <string name="btnRegistroVolver">Volver</string>
+    <string name="btnMapaAdd">Añadir</string>
+    <string name="tvAddEstrellas">Estrellas</string>
+    <string name="tvAddTapas">Tapas</string>
+    <string name="tvAddNombre">Nombre:</string>
+    <string name="btnAddAñadir">añadir</string>
 </resources>

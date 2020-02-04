@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.mistapas.R;
@@ -44,7 +46,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.util.List;
 
 
-public class MapaFragment extends Fragment  implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
+public class MapaFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
@@ -52,20 +54,37 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
     private GoogleMap mapa;
     private LatLng posicionActual;
     private Marker marcadorActual = null;
+    View root;
 
+    private Button btnMapaAdd;
     private boolean permisos = false;
 
     private FusedLocationProviderClient Posicion;
     private Location ultimaLocalizacion;
 
     @Override
-    public View onCreateView( LayoutInflater inflater,  ViewGroup container,
-                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mapa, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.fragment_mapa, container, false);
+        btnMapaAdd = (Button) root.findViewById(R.id.btnMapaAdd);
+
+
+        btnMapaAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddBar ij= AddBar.newInstance(posicionActual.latitude,posicionActual.longitude);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.nav_host_fragment,ij);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        return root;
     }
 
     @Override
-    public void onActivityCreated( Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         iniciarMapa();
 
@@ -84,6 +103,7 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
         }
         supportMapFragment.getMapAsync(this);
     }
+
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
@@ -103,7 +123,7 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
     /**
      * Con este método comprobamos q los permisos están otorgados, si no es asi se los pedirá al usuario
      */
-    private void pedirMultiplesPermisos(){
+    private void pedirMultiplesPermisos() {
         // Indicamos el permisos y el manejador de eventos de los mismos
         Dexter.withActivity(getActivity())
                 .withPermissions(
@@ -117,7 +137,7 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
                         // ccomprbamos si tenemos los permisos de todos ellos
                         if (report.areAllPermissionsGranted()) {
                             Toast.makeText(getContext().getApplicationContext(), "¡Todos los permisos concedidos!", Toast.LENGTH_SHORT).show();
-                            permisos=true;
+                            permisos = true;
                         }
 
                         // comprobamos si hay un permiso que no tenemos concedido ya sea temporal o permanentemente
@@ -147,7 +167,7 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
         mapa.setMinZoomPreference(15.0f);
         mapa.setOnMarkerClickListener(this);
 
-        if(permisos){
+        if (permisos) {
             mapa.setMyLocationEnabled(true);
         }
 
@@ -176,19 +196,13 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
                         if (ultimaLocalizacion != null) {
 
 
-
                             ultimaLocalizacion.setLatitude(ultimaLocalizacion.getLatitude());
                             ultimaLocalizacion.setLongitude(ultimaLocalizacion.getLongitude());
-                            posicionActual = new LatLng(ultimaLocalizacion.getLatitude(),ultimaLocalizacion.getLongitude());
+                            posicionActual = new LatLng(ultimaLocalizacion.getLatitude(), ultimaLocalizacion.getLongitude());
 
 
                             situarCamara();
                             marcadorPosicionActual();
-
-
-
-
-
 
 
                         } else {
@@ -210,7 +224,7 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
 
     }
 
-    
+
     private void situarCamara() {
         mapa.moveCamera(CameraUpdateFactory.newLatLng(posicionActual));
     }
@@ -227,12 +241,12 @@ public class MapaFragment extends Fragment  implements OnMapReadyCallback, Googl
         */
 
         // Borramos el arcador actual si está puesto
-        if(marcadorActual!=null){
+        if (marcadorActual != null) {
             marcadorActual.remove();
         }
         // añadimos el marcador actual
 
-        marcadorActual= mapa.addMarker(new MarkerOptions()
+        marcadorActual = mapa.addMarker(new MarkerOptions()
 
                 .position(posicionActual)
 
