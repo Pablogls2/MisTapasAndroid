@@ -9,6 +9,10 @@
     <string name="registro_confirmpass">Confirmar Contraseña:</string>
     <string name="registro_nombre">Nombre:</string>
     <string name="title_lista">Lista de Bares</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
     <string name="login_entrar">Login</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="btnRegistroRegistrar">Registrar</string>
