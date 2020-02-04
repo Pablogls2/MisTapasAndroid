@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondo"
+        tools:context=".ui.login.ActividadLogin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnLoginMostOcult"
+                android:layout_width="41dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="87dp"
+                android:layout_marginEnd="76dp"
+                android:background="@drawable/ic_visibility_24px"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.089"
+                app:layout_constraintStart_toEndOf="@+id/etpLoginContra"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLoginContra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Contraseña: "
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.363"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLoginUsu" />
+
+            <EditText
+                android:id="@+id/etpLoginContra"
+                android:layout_width="171dp"
+                android:layout_height="41dp"
+                android:layout_marginEnd="208dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.343"
+                app:layout_constraintStart_toEndOf="@+id/tvLoginContra"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginUsu" />
+
+            <Button
+                android:id="@+id/btnLoginLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Login"
+                android:textSize="16sp"
+                android:background="@drawable/btn2"
+                android:textColor="@drawable/boton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.601"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/etpLoginContra" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgLogin"
+                android:layout_width="41dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvLoginUsu"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="10dp"
+                android:text="Usuario: "
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.357"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
+
+            <EditText
+                android:id="@+id/etLoginUsu"
+                android:layout_width="171dp"
+                android:layout_height="41dp"
+                android:layout_marginEnd="195dp"
+                android:ems="3"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.511"
+                app:layout_constraintStart_toEndOf="@+id/tvLoginUsu"
+                app:layout_constraintTop_toBottomOf="@+id/imgLogin" />
+
+            <Button
+                android:id="@+id/btnLoginRegistrar"
+                android:layout_width="103dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/btn2"
+                android:text="Registrar"
+                android:textColor="@drawable/boton"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.357"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLoginContra" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>

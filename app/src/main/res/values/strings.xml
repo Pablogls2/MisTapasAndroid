@@ -2,9 +2,19 @@
     <string name="app_name">MisTapas</string>
     <string name="title_home">Home</string>
     <string name="title_mapa">Mapa</string>
+    <string name="registro_tittle">Registro</string>
+    <string name="registro_user">Usuario:</string>
+    <string name="registro_email">Email:</string>
+    <string name="registro_pass">Contraseña:</string>
+    <string name="registro_confirmpass">Confirmar Contraseña:</string>
+    <string name="registro_nombre">Nombre:</string>
     <string name="title_lista">Lista de Bares</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string name="login_entrar">Login</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="btnRegistroRegistrar">Registrar</string>
+    <string name="btnRegistroVolver">Volver</string>
 </resources>
