@@ -27,18 +27,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.6"/>
+
         <TextView
-                android:id="@+id/tvLoginContra"
-                android:layout_width="150dp"
-                android:layout_height="41dp"
-                android:text="Contraseña: "
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.523"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.061"/>
+            android:id="@+id/tvLoginContra"
+            android:layout_width="150dp"
+            android:layout_height="41dp"
+            android:text="Contraseña: "
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.019"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.52" />
+
         <EditText
                 android:id="@+id/etpLoginContra"
                 android:layout_width="210dp"
@@ -53,20 +57,23 @@
                 android:textSize="24sp" android:backgroundTint="#0347F4" android:foregroundTint="#020EAA"
                 android:textColorLink="#071E91" android:textColorHint="#071E91" android:textColorHighlight="#071E91"
                 android:shadowColor="#071E91"/>
+
         <Button
-                android:id="@+id/btnLoginLogin"
-                android:layout_width="117dp"
-                android:layout_height="67dp"
-                android:background="@drawable/btn2"
-                android:textColor="@drawable/boton"
-                android:text="Login"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.867"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.743"/>
+            android:id="@+id/btnLoginLogin"
+            android:layout_width="117dp"
+            android:layout_height="67dp"
+            android:background="@drawable/btn2"
+            android:text="Login"
+            android:textColor="@drawable/boton"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.867"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.743" />
+
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgLogin"
                 android:layout_width="wrap_content"
