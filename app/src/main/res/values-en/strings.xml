@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MisTapas</string>
+    <string name="btnRegistroRegistrar">Registration</string>
+    <string name="btnRegistroVolver">Back</string>
+    <string name="login_entrar">Login</string>
+    <string name="registro_confirmpass">Confirm Password:</string>
+    <string name="registro_email">Email:</string>
+    <string name="registro_nombre">Name:</string>
+    <string name="registro_pass">Password:</string>
+    <string name="registro_tittle">Register</string>
+    <string name="registro_user">User:</string>
+    <string name="title_home">Home</string>
+    <string name="title_lista">Bar List</string>
+    <string name="title_mapa">Map</string>
+    <string name="titulo_splash">MY TAPAS</string>
+    <string name="text_Home">Welcome to My Tapas</string>
+</resources>
