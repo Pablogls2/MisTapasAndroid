@@ -22,7 +22,12 @@ public interface MisTapasRest {
     @GET("login/{nick}/{psw}")
     Call<Usuario> findUser(@Path("nick") String nick,@Path("psw") String psw);
 
-    // Crear un producto
+    //Obtener usuario
+    // GET: por definir direccion
+    @GET("comproRegistro/{nick}")
+    Call<Usuario>  comproUser(@Path("nick") String nick);
+
+    // Crear un usuario
     //POST:
     @POST("registro")
     Call<Usuario> create(@Body Usuario user);
