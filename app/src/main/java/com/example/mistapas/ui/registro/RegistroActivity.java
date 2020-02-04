@@ -160,7 +160,7 @@ public class RegistroActivity extends AppCompatActivity {
 
     private void comprobarUsuario(){
         boolean existe=true;
-        Call<Usuario> call = misTapasRest.findUser(etRegistroUsuario.getText().toString(),etRegistroPsw.getText().toString());
+        Call<Usuario> call = misTapasRest.comproUser(etRegistroUsuario.getText().toString());
 
         //toast.show();
         Log.e("cosa","a");

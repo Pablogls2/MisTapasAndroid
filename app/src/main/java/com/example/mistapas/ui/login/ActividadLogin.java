@@ -46,7 +46,7 @@ public class ActividadLogin extends AppCompatActivity {
     Button btnLoginMostrarPass, btnLoginRegistro, btnLoginEntrar;
     RelativeLayout relativeLayout;
     private boolean esVisible;
-    ImageView imagen;
+
     private MisTapasRest misTapasRest;
 
 
@@ -66,7 +66,7 @@ public class ActividadLogin extends AppCompatActivity {
         btnLoginMostrarPass =(Button) findViewById(R.id.btnLoginMostOcult);
         btnLoginRegistro =(Button)findViewById(R.id.btnLoginRegistrar);
         btnLoginEntrar =(Button)findViewById(R.id.btnLoginLogin);
-        imagen=(ImageView)findViewById(R.id.imgLogin);
+
 
 
         // Iniciamos la API REST
