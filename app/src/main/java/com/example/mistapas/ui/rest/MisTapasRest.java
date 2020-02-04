@@ -3,6 +3,7 @@ package com.example.mistapas.ui.rest;
 import com.example.mistapas.ui.modelos.Bar;
 import com.example.mistapas.ui.modelos.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,7 +39,7 @@ public interface MisTapasRest {
 
     //ListarBares
     @GET("listBar/{idUsuario}")
-    Call<List<Bar>> findAllBares();
+    Call<ArrayList<Bar>> findAllBares(@Path("idUsuario") String idUsuario);
 
     //recoger bares con filtro
     @GET("listBar/{idUsuario}/{nombre}")

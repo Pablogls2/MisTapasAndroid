@@ -17,6 +17,11 @@ public class Bar {
     @Expose
     private String nombre;
 
+    //tapas
+    @SerializedName("tapas")
+    @Expose
+    private String tapas;
+
     //latitud
     @SerializedName("latitud")
     @Expose
@@ -59,6 +64,20 @@ public class Bar {
         this.estrellas = estrellas;
         this.idUsuario = idUsuario;
         this.imagen = imagen;
+    }
+
+    @Override
+    public String toString() {
+        return "Bar{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", tapas='" + tapas + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", estrellas=" + estrellas +
+                ", idUsuario=" + idUsuario +
+                ", imagen=" + imagen +
+                '}';
     }
 
     public int getId() {
