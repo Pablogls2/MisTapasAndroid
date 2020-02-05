@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mistapas.R;
 import com.example.mistapas.ui.modelos.Bar;
@@ -64,11 +65,11 @@ public class BaresAdapter  extends RecyclerView.Adapter<BaresAdapter.ViewHolder>
 
             @Override
             public void onClick(View view) {
-               /* InformacionJuegoFragment ij= InformacionJuegoFragment.newInstance("visualizar",bar);
+                DetalleBares ij= DetalleBares.newInstance(bar);
                 FragmentTransaction transaction = fm.beginTransaction();
                 transaction.replace(R.id.nav_host_fragment,ij);
                 transaction.addToBackStack(null);
-                transaction.commit();*/
+                transaction.commit();
             }
         });
     }

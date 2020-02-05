@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Bar {
+import java.io.Serializable;
+
+public class Bar implements Serializable {
 
     //Campos
     //id

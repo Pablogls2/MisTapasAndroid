@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="50dp"/>
 
     <Button
-        android:id="@+id/btnMapaAdd"
+        android:id="@+id/btnDetalleBorrar"
         android:layout_width="54dp"
         android:layout_height="53dp"
         android:background="@mipmap/ic_add_round"

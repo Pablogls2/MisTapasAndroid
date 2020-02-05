@@ -1,15 +1,12 @@
 package com.example.mistapas.ui.mapa;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
-import android.os.AsyncTask;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,27 +14,20 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Environment;
-import android.os.Handler;
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mistapas.R;
+import com.example.mistapas.ui.login.BdController;
+import com.example.mistapas.ui.modelos.Bar;
+import com.example.mistapas.ui.rest.ApiUtils;
+import com.example.mistapas.ui.rest.MisTapasRest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -49,43 +39,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 
 public class MapaFragment extends Fragment implements  OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
@@ -94,7 +56,8 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
 
     private View root;
     private GoogleMap mMap;
-
+    private MisTapasRest misTapasRest;
+    private ArrayList<Bar> bares = new ArrayList<>();
     private Bundle mBundle;
 
 
@@ -141,12 +104,17 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
         //se inicializan los componentes
         mPosicion = LocationServices.getFusedLocationProviderClient(getActivity());
 
+        if(isNetworkAvailable()) {
+            misTapasRest = ApiUtils.getService();
+        }else{
+            Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+        }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-       btnMapaAdd= root.findViewById(R.id.btnMapaAdd);
+       btnMapaAdd= root.findViewById(R.id.btnDetalleBorrar);
         btnMapaAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,17 +126,16 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
 
             }
         });
-
-
-
-
-
-
-
-
+        pintarBares();
         return root;
+    }
 
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService
+                (Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 
@@ -416,6 +383,45 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
             Log.i("Mapa", "Location services connection failed with code " + connectionResult.getErrorCode());
         }
 
+    }
+
+    private void pintarBares() {
+        int id = BdController.selectIdUser(getContext());
+
+        Log.e("cargarDatos ", "asda" + id);
+
+
+        Call<ArrayList<Bar>> call = misTapasRest.findAllBares(String.valueOf(id));
+        call.enqueue(new Callback<ArrayList<Bar>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Bar>> call, Response<ArrayList<Bar>> response) {
+                //Log.e("ERROR: ", "asda");
+                if (response.isSuccessful()) {
+                    bares = response.body();
+
+                    for (int i = 0; i < bares.size(); i++) {
+                        Log.e("relle ", "asda" + bares.get(i).getNombre());
+                        LatLng pos = new LatLng(bares.get(i).getLatitud(), bares.get(i).getLongitud());
+                        mMap.addMarker(new MarkerOptions()
+                                // Posición
+                                .position(pos)
+                                // Título
+                                .title(bares.get(i).getNombre())
+                                // Subtitulo
+                                .snippet(String.valueOf(bares.get(i).getEstrellas()) + " estrellas")
+                                // Color o tipo d icono
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                        );
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Bar>> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+                //Toast.makeText( , "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
