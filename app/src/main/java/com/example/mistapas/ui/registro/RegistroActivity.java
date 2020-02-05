@@ -52,7 +52,8 @@ public class RegistroActivity extends AppCompatActivity {
                 if(comprobarEmail(etRegistroEmail.getText().toString())){
                     etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
                     if(etRegistroConfirPsw.getText().toString().equals(etRegistroPsw.getText().toString())){
-                        comprobarUsuario();
+                        u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
+                        salvarUsuario(u);
 
                         etRegistroConfirPsw.setBackgroundResource(R.drawable.normal_et);
                         etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
@@ -121,21 +122,19 @@ public class RegistroActivity extends AppCompatActivity {
 
         Call<Usuario> call = misTapasRest.create(p);
         call.enqueue(new Callback<Usuario>() {
-
             // Si todo ok
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(RegistroActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(RegistroActivity.this, "Usuario pollas", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistroActivity.this, "Usuario repetido", Toast.LENGTH_LONG).show();
                 }
             }
-
             // Si error
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e("e","Error: "+ t.getMessage());
+                Log.e("cositas","Error: "+ t.getMessage());
             }
         });
     }
@@ -155,35 +154,6 @@ public class RegistroActivity extends AppCompatActivity {
         } else {
             return false;
         }
-
-    }
-
-    private void comprobarUsuario(){
-        Call<Usuario> call = misTapasRest.comproUser(etRegistroUsuario.getText().toString());
-        Log.e("cosa","a");
-        call.enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.isSuccessful()){
-                    Usuario user = response.body();
-                    Usuario u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
-                    if(user.getNickname().equals(u.getNickname())){
-                        Toast.makeText(getApplicationContext(),"Usuario repetido",Toast.LENGTH_SHORT).show();
-                    }else{
-                        salvarUsuario(u);
-                    }
-
-                }else{
-                    Toast.makeText(getApplicationContext(),"error ",Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e("ERROR: ", t.getMessage());
-            }
-        });
-
 
     }
 }
