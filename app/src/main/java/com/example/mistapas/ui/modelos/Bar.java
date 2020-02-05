@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Blob;
-
 public class Bar {
 
     //Campos
@@ -18,6 +16,11 @@ public class Bar {
     @SerializedName("nombre")
     @Expose
     private String nombre;
+
+    //tapas
+    @SerializedName("tapas")
+    @Expose
+    private String tapas;
 
     //latitud
     @SerializedName("latitud")
@@ -44,10 +47,6 @@ public class Bar {
     @Expose
     private String imagen;
 
-    @SerializedName("imagen")
-    @Expose
-    private String tapas;
-
     public Bar(String nombre, Double latitud, Double longitud, int estrellas,String tapas,String imagen ,int idUsuario ) {
         this.nombre = nombre;
         this.latitud = latitud;
@@ -66,6 +65,20 @@ public class Bar {
         this.estrellas = estrellas;
         this.idUsuario = idUsuario;
         this.imagen = imagen;
+    }
+
+    @Override
+    public String toString() {
+        return "Bar{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", tapas='" + tapas + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", estrellas=" + estrellas +
+                ", idUsuario=" + idUsuario +
+                ", imagen=" + imagen +
+                '}';
     }
 
     public String getTapas() {

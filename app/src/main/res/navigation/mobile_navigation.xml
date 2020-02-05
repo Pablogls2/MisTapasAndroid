@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_lista"
-        android:name="com.example.mistapas.ui.listabares.NotificationsFragment"
+        android:name="com.example.mistapas.ui.listabares.BaresFragment"
         android:label="@string/title_lista"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/lista_bares" />
 </navigation>
