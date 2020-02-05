@@ -94,9 +94,6 @@ public class BaresFragment extends Fragment {
             public void onResponse(Call<ArrayList<Bar>> call, Response<ArrayList<Bar>> response) {
                 //Log.e("ERROR: ", "asda");
                 if(response.isSuccessful()){
-
-                    // Si tienes exito nos quedamos con el ResponseBody, listado en JSON
-                    // Nos hace el pasrser automáticamente
                     listaBares =  response.body();
                     FragmentManager fm = getFragmentManager();
                     adapter = new BaresAdapter (listaBares, getContext(),fm);
