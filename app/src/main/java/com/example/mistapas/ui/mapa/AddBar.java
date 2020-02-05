@@ -134,11 +134,11 @@ public class AddBar extends Fragment {
 
 
     public void iniciarVista(){
-        ivAddImagen= (ImageView) root.findViewById(R.id.ivDetalleImagen);
-        etAddTitulo = root.findViewById(R.id.etDetalleNombre);
-        etAddTapas=root.findViewById(R.id.etDetalleTapas);
-        spAddSpinner= root.findViewById(R.id.spDetalleEstrellas);
-        btnMapaAdd=root.findViewById(R.id.btnDetalleBorrar);
+        ivAddImagen= (ImageView) root.findViewById(R.id.ivAddImagen);
+        etAddTitulo = root.findViewById(R.id.etAddNombre);
+        etAddTapas=root.findViewById(R.id.etAddTapas);
+        spAddSpinner= root.findViewById(R.id.spAddEstrellas);
+        btnMapaAdd=root.findViewById(R.id.btnMapaAdd);
         String[] estrellas = {"*","**", "***", "****", "*****"};
         spAddSpinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, estrellas));
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);

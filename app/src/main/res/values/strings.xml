@@ -21,4 +21,7 @@
     <string name="titulo_splash">MIS TAPAS</string>
     <string name="text_Home">Bienvenido a Mis Tapas</string>
     <string name="detalle_borrar">Borrar</string>
+    <string name="tvDetalleNombre">Nombre:</string>
+    <string name="tvDetalleTapas">Tapas:</string>
+    <string name="tvDetalleEstrellas">Estrellas:</string>
 </resources>
