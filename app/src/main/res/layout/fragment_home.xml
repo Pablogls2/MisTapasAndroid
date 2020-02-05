@@ -6,7 +6,7 @@
     android:background="@drawable/fondo">
 
     <TextView
-            android:id="@+id/text_home"
+            android:id="@+id/tvHomeSaludo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -24,8 +24,15 @@
     <ImageView
             android:layout_width="235dp"
             android:layout_height="232dp" app:srcCompat="@drawable/tapas"
-            android:id="@+id/imageView"
+            android:id="@+id/ivHomeLogo"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.174" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.556"/>
+            app:layout_constraintVertical_bias="0.31" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp" app:srcCompat="@drawable/ic_logout"
+            android:id="@+id/ivHomeLogout" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintVertical_bias="0.037"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

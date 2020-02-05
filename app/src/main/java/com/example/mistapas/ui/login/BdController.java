@@ -43,6 +43,27 @@ public class BdController extends SQLiteOpenHelper {
         db.execSQL(sqlCreate);
     }
 
+    public static  String  selectToken(Context c) {
+        String token="";
+        BdController Login = new BdController(c, "Login", null, 1);
+        SQLiteDatabase bd = Login.getWritableDatabase();
+        //Si hemos abierto correctamente la base de datos
+        if (bd != null) {
+            //Seleccionamos todos
+            Cursor cur = bd.rawQuery(" SELECT configuracion  FROM Login", null);
+            //Nos aseguramos de que existe al menos un registro
+            if (cur.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros y se llena la lista de juegos
+                token = cur.getString(0);
+
+            }
+            //Cerramos la base de datos
+            bd.close();
+        }
+
+        return token;
+    }
+
     public  static void insertarData(Context c,String id_disp, String token , int id_user) {
         //Abrimos la base de datos  en modo escritura
         BdController Login = new BdController(c, "Login", null, 1);

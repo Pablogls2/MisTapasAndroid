@@ -7,11 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
+import retrofit2.http.*;
 
 public interface MisTapasRest {
     //Obtenemos todos los resultados
@@ -46,7 +42,16 @@ public interface MisTapasRest {
     @GET("listBar/{idUsuario}/{nombre}")
     Call<List<Bar>> findFiltroBares();
 
+    //update del token
     @PUT("updateTok/{id}")
     Call<Usuario> update(@Path ("id") int id, @Body Usuario user);
+
+    //borrar bares
+    @DELETE("deleteBar/{id}")
+    Call<Bar> deleteBar(@Path("id") int id);
+
+    //comprobamos el token
+    @GET("comproToken/{token}")
+    Call<Usuario>  comproToken(@Path("token") String token);
 
 }
