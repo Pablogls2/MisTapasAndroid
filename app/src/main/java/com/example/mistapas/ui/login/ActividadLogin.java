@@ -114,6 +114,8 @@ public class ActividadLogin extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
     }
 
     private boolean isNetworkAvailable() {

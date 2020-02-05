@@ -28,11 +28,8 @@ import androidx.fragment.app.Fragment;
 import com.example.mistapas.R;
 import com.example.mistapas.ui.login.BdController;
 import com.example.mistapas.ui.modelos.Bar;
-import com.example.mistapas.ui.modelos.Usuario;
-import com.example.mistapas.ui.registro.RegistroActivity;
 import com.example.mistapas.ui.rest.ApiUtils;
 import com.example.mistapas.ui.rest.MisTapasRest;
-import com.google.android.gms.maps.model.LatLng;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -137,10 +134,10 @@ public class AddBar extends Fragment {
 
 
     public void iniciarVista(){
-        ivAddImagen= (ImageView) root.findViewById(R.id.ivAddImagen);
-        etAddTitulo = root.findViewById(R.id.etAddNombre);
-        etAddTapas=root.findViewById(R.id.etAddTapas);
-        spAddSpinner= root.findViewById(R.id.spAddEstrellas);
+        ivAddImagen= (ImageView) root.findViewById(R.id.ivDetalleImagen);
+        etAddTitulo = root.findViewById(R.id.etDetalleNombre);
+        etAddTapas=root.findViewById(R.id.etDetalleTapas);
+        spAddSpinner= root.findViewById(R.id.spDetalleEstrellas);
         btnMapaAdd=root.findViewById(R.id.btnMapaAdd);
         String[] estrellas = {"*","**", "***", "****", "*****"};
         spAddSpinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, estrellas));

@@ -9,7 +9,7 @@
     tools:context=".ui.mapa.AddBar">
 
     <TextView
-        android:id="@+id/tvAddEstrellas"
+        android:id="@+id/tvDetalleEstrellas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.543" />
 
     <TextView
-        android:id="@+id/tvAddTapas"
+        android:id="@+id/tvDetalleTapas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.223" />
 
     <ImageView
-        android:id="@+id/ivAddImagen"
+        android:id="@+id/ivDetalleImagen"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#151615"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/tvAddNombre"
+        android:id="@+id/tvDetalleNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -88,7 +88,7 @@
         app:layout_constraintGuide_begin="283dp" />
 
     <EditText
-        android:id="@+id/etAddNombre"
+        android:id="@+id/etDetalleNombre"
         android:layout_width="203dp"
         android:layout_height="44dp"
         android:backgroundTint="#151615"
@@ -119,7 +119,7 @@
         app:layout_constraintVertical_bias="0.757" />
 
     <Spinner
-        android:id="@+id/spAddEstrellas"
+        android:id="@+id/spDetalleEstrellas"
         android:layout_width="191dp"
         android:layout_height="31dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,7 +130,7 @@
         app:layout_constraintVertical_bias="0.757" />
 
     <EditText
-        android:id="@+id/etAddTapas"
+        android:id="@+id/etDetalleTapas"
         android:layout_width="213dp"
         android:layout_height="94dp"
         android:ems="10"

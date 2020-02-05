@@ -33,7 +33,7 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText etRegistroPsw;
     private EditText etRegistroConfirPsw;
 
-    private boolean existente=false;
+    private boolean existente = false;
 
 
     @Override
@@ -46,32 +46,15 @@ public class RegistroActivity extends AppCompatActivity {
 
         this.btnRegistroAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
-                Usuario u=null;
-                if(comprobarEmail(etRegistroEmail.getText().toString())){
+                Usuario u = null;
+                if (comprobarEmail(etRegistroEmail.getText().toString())) {
+                    etRegistroEmail.setBackgroundResource(R.drawable.normal_et);
                     etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
-                    if(etRegistroConfirPsw.getText().toString().equals(etRegistroPsw.getText().toString())){
-                        comprobarUsuario();
-
-                        etRegistroConfirPsw.setBackgroundResource(R.drawable.normal_et);
-                        etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
-                       /* u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
-                        salvarUsuario(u);*/
-                        if(!existente){
-
-
-                            //volver al login
-                            //Intent intent = new Intent(RegistroActivity.this, ActividadLogin.class);
-                            //startActivity(intent);
-                        }else {
-                            Toast.makeText(getApplicationContext(),"USUARIO REPETIDO ",Toast.LENGTH_SHORT).show();
-                        }
-
-
-
-                    }else{
-
+                    if (etRegistroConfirPsw.getText().toString().equals(etRegistroPsw.getText().toString())) {
+                        u = new Usuario(etRegistroUsuario.getText().toString(), etRegistroNombre.getText().toString(), etRegistroEmail.getText().toString(), etRegistroPsw.getText().toString());
+                        salvarUsuario(u);
+                    } else {
                         etRegistroConfirPsw.setError("No coinciden");
                         etRegistroConfirPsw.setText("");
                         etRegistroConfirPsw.setBackgroundResource(R.drawable.error_et);
@@ -79,13 +62,9 @@ public class RegistroActivity extends AppCompatActivity {
 
                     }
                 }else{
-                    etRegistroEmail.setError("Email no valido");
-                    etRegistroConfirPsw.setBackgroundResource(R.drawable.error_et);
+                    etRegistroEmail.setError("Email erroneo");
+                    etRegistroEmail.setBackgroundResource(R.drawable.error_et);
                 }
-
-
-
-
             }
         });
 
@@ -98,22 +77,21 @@ public class RegistroActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
-    public  void iniciarVista(){
-        this.btnRegistroAceptar= findViewById(R.id.btnRegistroRegistrar);
-        this.btnRegistroVolver= findViewById(R.id.btnRegistroVolver);
-        this.etRegistroUsuario= findViewById(R.id.etRegistroUsuario);
-        this.etRegistroEmail= findViewById(R.id.etRegistroEmail);
-        this.etRegistroConfirPsw= findViewById(R.id.etRegistroConfirm);
-        this.etRegistroNombre= findViewById(R.id.etRegistroNombre);
-        this.etRegistroPsw= findViewById(R.id.etRegistroPass);
+    public void iniciarVista() {
+        this.btnRegistroAceptar = findViewById(R.id.btnRegistroRegistrar);
+        this.btnRegistroVolver = findViewById(R.id.btnRegistroVolver);
+        this.etRegistroUsuario = findViewById(R.id.etRegistroUsuario);
+        this.etRegistroEmail = findViewById(R.id.etRegistroEmail);
+        this.etRegistroConfirPsw = findViewById(R.id.etRegistroConfirm);
+        this.etRegistroNombre = findViewById(R.id.etRegistroNombre);
+        this.etRegistroPsw = findViewById(R.id.etRegistroPass);
     }
 
     /**
      * Salva un producto mediante RESR
+     *
      * @param p Producto a salvar
      */
     private void salvarUsuario(Usuario p) {
@@ -121,32 +99,31 @@ public class RegistroActivity extends AppCompatActivity {
 
         Call<Usuario> call = misTapasRest.create(p);
         call.enqueue(new Callback<Usuario>() {
-
             // Si todo ok
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(RegistroActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(RegistroActivity.this, "Usuario pollas", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(RegistroActivity.this, "Usuario repetido", Toast.LENGTH_LONG).show();
                 }
             }
 
             // Si error
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e("e","Error: "+ t.getMessage());
+                Log.e("cositas", "Error: " + t.getMessage());
             }
         });
     }
 
-    private boolean comprobarEmail(String email){
+    private boolean comprobarEmail(String email) {
 
         // Patrón para validar el email
         Pattern pattern = Pattern
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-
+//commit
 
         Matcher mather = pattern.matcher(email);
 
@@ -155,35 +132,6 @@ public class RegistroActivity extends AppCompatActivity {
         } else {
             return false;
         }
-
-    }
-
-    private void comprobarUsuario(){
-        Call<Usuario> call = misTapasRest.comproUser(etRegistroUsuario.getText().toString());
-        Log.e("cosa","a");
-        call.enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.isSuccessful()){
-                    Usuario user = response.body();
-                    Usuario u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
-                    if(user.getNickname().equals(u.getNickname())){
-                        Toast.makeText(getApplicationContext(),"Usuario repetido",Toast.LENGTH_SHORT).show();
-                    }else{
-                        salvarUsuario(u);
-                    }
-
-                }else{
-                    Toast.makeText(getApplicationContext(),"error ",Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e("ERROR: ", t.getMessage());
-            }
-        });
-
 
     }
 }

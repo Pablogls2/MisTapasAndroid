@@ -1,19 +1,12 @@
 package com.example.mistapas.ui.mapa;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,30 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.os.Environment;
-import android.os.Handler;
-import android.os.SystemClock;
-import android.provider.Settings;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mistapas.R;
-import com.example.mistapas.ui.listabares.BaresAdapter;
 import com.example.mistapas.ui.login.BdController;
 import com.example.mistapas.ui.modelos.Bar;
 import com.example.mistapas.ui.rest.ApiUtils;
@@ -60,57 +39,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
+import java.util.Timer;
 
-public class MapaFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
+
+public class MapaFragment extends Fragment implements  OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
     private View root;
     private GoogleMap mMap;
-
+    private MisTapasRest misTapasRest;
+    private ArrayList<Bar> bares = new ArrayList<>();
     private Bundle mBundle;
 
 
@@ -137,10 +84,15 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
     private Button btnMapaAdd;
 
-    private ArrayList<Bar> bares = new ArrayList<>();
+    private ArrayList<LatLng> recorrido;
 
     private Timer timer = null;
-    private MisTapasRest misTapasRest;
+
+
+
+
+
+
 
 
     @Override
@@ -152,19 +104,17 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         //se inicializan los componentes
         mPosicion = LocationServices.getFusedLocationProviderClient(getActivity());
 
+        if(isNetworkAvailable()) {
+            misTapasRest = ApiUtils.getService();
+        }else{
+            Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+        }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
-        if (isNetworkAvailable()) {
-            misTapasRest = ApiUtils.getService();
-        } else {
-            Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
-        }
-
-        btnMapaAdd = root.findViewById(R.id.btnMapaAdd);
+       btnMapaAdd= root.findViewById(R.id.btnMapaAdd);
         btnMapaAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,13 +126,16 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
             }
         });
-
         pintarBares();
-
-
         return root;
+    }
 
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService
+                (Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 
@@ -230,17 +183,12 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService
-                (Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
     /**
      * Metodo para guardar la ruta del usuario
      */
+
+
+
 
 
     private void situarCamaraMapa() {
@@ -281,6 +229,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     }
 
 
+
+
     // Obtenermos y leemos directamente el GPS
     private void obtenerPosicion() {
         try {
@@ -312,6 +262,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
     // Para dibujar el marcador actual
     private void marcadorPosicionActual() {
+
 
 
         // Borramos el arcador actual si está puesto
@@ -382,6 +333,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     }
 
 
+
+
     @Override
     public void onLocationChanged(Location location) {
         handleNewLocation(location);
@@ -432,15 +385,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
     }
 
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
-    }
-
-
-
-
     private void pintarBares() {
         int id = BdController.selectIdUser(getContext());
 
@@ -458,7 +402,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                     for (int i = 0; i < bares.size(); i++) {
                         Log.e("relle ", "asda" + bares.get(i).getNombre());
                         LatLng pos = new LatLng(bares.get(i).getLatitud(), bares.get(i).getLongitud());
-                        BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(base64ToBitmap(bares.get(i).getImagen()));
                         mMap.addMarker(new MarkerOptions()
                                 // Posición
                                 .position(pos)
@@ -481,8 +424,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         });
     }
 
-    private Bitmap base64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }

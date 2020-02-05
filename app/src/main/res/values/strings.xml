@@ -20,4 +20,5 @@
     <string name="btnAddAñadir">añadir</string>
     <string name="titulo_splash">MIS TAPAS</string>
     <string name="text_Home">Bienvenido a Mis Tapas</string>
+    <string name="detalle_borrar">Borrar</string>
 </resources>

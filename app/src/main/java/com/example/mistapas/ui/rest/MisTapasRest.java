@@ -49,4 +49,7 @@ public interface MisTapasRest {
     @PUT("updateTok/{id}")
     Call<Usuario> update(@Path ("id") int id, @Body Usuario user);
 
+    @GET("comproToken/{token}")
+    Call<Usuario>  comproToken(@Path("token") String token);
+
 }
