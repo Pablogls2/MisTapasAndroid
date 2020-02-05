@@ -153,14 +153,6 @@ public class AddBar extends Fragment {
 
     }
 
-    public static byte[] getBytesFromBitmap(Bitmap bitmap) {
-        if (bitmap!=null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            return stream.toByteArray();
-        }
-        return null;
-    }
 
 
 
@@ -394,5 +386,7 @@ public class AddBar extends Fragment {
             }
         });
     }
+
+
 
 }

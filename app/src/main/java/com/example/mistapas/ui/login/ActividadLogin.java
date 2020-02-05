@@ -137,9 +137,10 @@ public class ActividadLogin extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Usuario user = response.body();
                     if(user != null){
-
+                        //para coger la id del dispositivo
                          String android_id = Settings.Secure.getString(getContentResolver(),
                                 Settings.Secure.ANDROID_ID);
+                         //para coger la fecha actual y pasarla a md5
                         Date currentTime = Calendar.getInstance().getTime();
                         String token=currentTime.toString();
                          token= md5(token);

@@ -44,7 +44,7 @@ public class Bar {
     @Expose
     private String imagen;
 
-    @SerializedName("imagen")
+    @SerializedName("tapas")
     @Expose
     private String tapas;
 
@@ -131,4 +131,8 @@ public class Bar {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+
+
+
 }
