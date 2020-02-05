@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mistapas.MainActivity;
 import com.example.mistapas.R;
 import com.example.mistapas.ui.login.ActividadLogin;
+import com.example.mistapas.ui.login.BdController;
 import com.example.mistapas.ui.modelos.Bar;
 import com.example.mistapas.ui.modelos.Usuario;
 import com.example.mistapas.ui.rest.ApiUtils;
@@ -88,7 +89,8 @@ public class BaresFragment extends Fragment {
     }
 
     private void cargarDatos(){
-        Call<ArrayList<Bar>> call = misTapasRest.findAllBares("1");
+        int id = BdController.selectIdUser(getContext());
+        Call<ArrayList<Bar>> call = misTapasRest.findAllBares(String.valueOf(id));
         call.enqueue(new Callback<ArrayList<Bar>>() {
             @Override
             public void onResponse(Call<ArrayList<Bar>> call, Response<ArrayList<Bar>> response) {

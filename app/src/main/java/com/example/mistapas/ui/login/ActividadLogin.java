@@ -192,7 +192,6 @@ public class ActividadLogin extends AppCompatActivity {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(ActividadLogin.this, "Producto actualizado", Toast.LENGTH_SHORT).show();
                 }
             }
             // Si error

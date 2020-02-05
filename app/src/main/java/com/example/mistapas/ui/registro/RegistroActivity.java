@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.mistapas.MainActivity;
 import com.example.mistapas.R;
 import com.example.mistapas.ui.login.ActividadLogin;
 import com.example.mistapas.ui.modelos.Usuario;
@@ -34,7 +33,7 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText etRegistroPsw;
     private EditText etRegistroConfirPsw;
 
-    private boolean existente=true;
+    private boolean existente=false;
 
 
     @Override
@@ -57,12 +56,14 @@ public class RegistroActivity extends AppCompatActivity {
 
                         etRegistroConfirPsw.setBackgroundResource(R.drawable.normal_et);
                         etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
+                       /* u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
+                        salvarUsuario(u);*/
                         if(!existente){
-                            u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
-                            salvarUsuario(u);
+
+
                             //volver al login
-                            Intent intent = new Intent(RegistroActivity.this, ActividadLogin.class);
-                            startActivity(intent);
+                            //Intent intent = new Intent(RegistroActivity.this, ActividadLogin.class);
+                            //startActivity(intent);
                         }else {
                             Toast.makeText(getApplicationContext(),"USUARIO REPETIDO ",Toast.LENGTH_SHORT).show();
                         }
@@ -127,15 +128,14 @@ public class RegistroActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Toast.makeText(RegistroActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(RegistroActivity.this, response.toString() , Toast.LENGTH_LONG).show();
-                    Log.e("404","dd"+response.toString());
+                    Toast.makeText(RegistroActivity.this, "Usuario pollas", Toast.LENGTH_LONG).show();
                 }
             }
 
             // Si error
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e("ERROR: ", t.getMessage());
+                Log.e("e","Error: "+ t.getMessage());
             }
         });
     }
@@ -159,21 +159,20 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void comprobarUsuario(){
-        boolean existe=true;
         Call<Usuario> call = misTapasRest.comproUser(etRegistroUsuario.getText().toString());
-
-        //toast.show();
         Log.e("cosa","a");
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
                     Usuario user = response.body();
-                    if(user != null){
-
-                    }else {
-                        existente=false;
+                    Usuario u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
+                    if(user.getNickname().equals(u.getNickname())){
+                        Toast.makeText(getApplicationContext(),"Usuario repetido",Toast.LENGTH_SHORT).show();
+                    }else{
+                        salvarUsuario(u);
                     }
+
                 }else{
                     Toast.makeText(getApplicationContext(),"error ",Toast.LENGTH_SHORT).show();
                 }

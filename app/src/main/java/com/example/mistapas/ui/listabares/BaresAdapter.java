@@ -2,7 +2,9 @@ package com.example.mistapas.ui.listabares;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,7 @@ public class BaresAdapter  extends RecyclerView.Adapter<BaresAdapter.ViewHolder>
         }
         holder.estrellas.setText(stars);
 
-       // holder.imageView.setImageBitmap(Bitmap.createScaledBitmap(bar.getImagen(),620,540,false));
+       holder.imageView.setImageBitmap(Bitmap.createScaledBitmap(base64ToBitmap(bar.getImagen()),620,540,false));
 
 
         holder.cvJuegoCardView.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +71,11 @@ public class BaresAdapter  extends RecyclerView.Adapter<BaresAdapter.ViewHolder>
                 transaction.commit();*/
             }
         });
+    }
+
+    private Bitmap base64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
 

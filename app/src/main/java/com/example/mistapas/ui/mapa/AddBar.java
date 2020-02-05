@@ -12,12 +12,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -129,9 +124,8 @@ public class AddBar extends Fragment {
                     Toast.makeText(getActivity(), "¡Por favor rellena todos los campos!", Toast.LENGTH_SHORT).show();
                 }else {
                    int id= BdController.selectIdUser(getContext());
-                    Toast.makeText(getActivity(), "A"+id, Toast.LENGTH_SHORT).show();
                       Bar b = new Bar(etAddTitulo.getText().toString(), latitud, longitud,spAddSpinner.getSelectedItem().toString().length(),etAddTapas.getText().toString(),bitmapToBase64(imagenTransformada),id);
-                       salvarBar(b);
+                      salvarBar(b);
 
                     }
                 }
@@ -150,6 +144,8 @@ public class AddBar extends Fragment {
         btnMapaAdd=root.findViewById(R.id.btnMapaAdd);
         String[] estrellas = {"*","**", "***", "****", "*****"};
         spAddSpinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, estrellas));
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
     }
 
