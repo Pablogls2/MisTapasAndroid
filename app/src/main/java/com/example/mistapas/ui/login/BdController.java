@@ -50,8 +50,7 @@ public class BdController extends SQLiteOpenHelper {
         //Si hemos abierto correctamente la base de datos
         if (bd != null) {
             try {
-
-
+                bd.execSQL("DELETE FROM Login");
 
                 //insertamos el juego recibido con su id
                 bd.execSQL("INSERT INTO Login (id_disp  , configuracion , id_user   ) " +

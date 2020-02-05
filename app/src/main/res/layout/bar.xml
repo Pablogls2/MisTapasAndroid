@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   android:id="@+id/cvListJuegos"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_margin="15dp"
+                                   android:background="@color/colorPrimary"
+                                   android:orientation="vertical"
+                                   app:cardCornerRadius="30dp"
+                                   app:cardElevation="8dp"
+                                   app:contentPadding="2dp">
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="216dp">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="131dp">
+
+            <ImageView
+                    android:id="@+id/ivListBaresImagen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="1dp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="Icon" android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true" android:layout_marginStart="0dp"
+                    android:layout_alignParentTop="true" android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="0dp"/>
+        </RelativeLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/relatu"
+                android:layout_width="match_parent"
+                android:layout_height="85dp">
+            <TextView
+                    android:layout_width="374dp"
+                    android:layout_height="40dp" android:id="@+id/tvListaNombre"
+                    android:layout_marginEnd="268dp"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" android:textSize="18sp" android:textStyle="bold"
+                    android:textColor="#151615"/>
+            <TextView
+                    android:layout_width="374dp"
+                    android:layout_height="40dp" android:id="@+id/tvListaEstrellas"
+                    android:layout_marginEnd="268dp"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" android:textSize="18sp" android:textStyle="bold"
+                    android:textColor="#151615"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

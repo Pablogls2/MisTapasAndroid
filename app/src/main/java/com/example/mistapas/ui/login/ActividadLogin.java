@@ -148,9 +148,6 @@ public class ActividadLogin extends AppCompatActivity {
 
                         actualizarToken(user.getId(),user);
                         BdController.insertarData(getApplicationContext(),android_id,token,user.getId());
-
-
-
                         Intent intent = new Intent(ActividadLogin.this, MainActivity.class);
 
                         startActivity(intent);
@@ -194,10 +191,8 @@ public class ActividadLogin extends AppCompatActivity {
         Call<Usuario> call = misTapasRest.update(id, u);
         call.enqueue(new Callback<Usuario>() {
             @Override
-// Si todo ok
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(ActividadLogin.this, "Producto actualizado", Toast.LENGTH_SHORT).show();
                 }
             }
             // Si error

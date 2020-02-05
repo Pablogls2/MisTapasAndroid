@@ -1,5 +1,6 @@
-package com.example.mistapas.ui.registro;
+package com.example.mistapas.ui.listabares;
 
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,16 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.mistapas.R;
 
-public class RegistroFragment extends Fragment {
+public class DetalleBares extends Fragment {
 
-    public static RegistroFragment newInstance() {
-        return new RegistroFragment();
+    public static DetalleBares newInstance() {
+        return new DetalleBares();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root= inflater.inflate(R.layout.registro_activity, container, false);
+        View root = inflater.inflate(R.layout.detalle_bares_fragment, container, false);
 
         return root;
     }

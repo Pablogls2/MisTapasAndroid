@@ -7,8 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -19,11 +23,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Environment;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,6 +44,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mistapas.R;
+import com.example.mistapas.ui.listabares.BaresAdapter;
+import com.example.mistapas.ui.login.BdController;
+import com.example.mistapas.ui.modelos.Bar;
+import com.example.mistapas.ui.rest.ApiUtils;
+import com.example.mistapas.ui.rest.MisTapasRest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -49,6 +60,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -87,8 +99,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MapaFragment extends Fragment implements  OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
+
+public class MapaFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
@@ -121,15 +137,10 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
 
     private Button btnMapaAdd;
 
-    private ArrayList<LatLng> recorrido;
+    private ArrayList<Bar> bares = new ArrayList<>();
 
     private Timer timer = null;
-
-
-
-
-
-
+    private MisTapasRest misTapasRest;
 
 
     @Override
@@ -146,7 +157,14 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-       btnMapaAdd= root.findViewById(R.id.btnMapaAdd);
+
+        if (isNetworkAvailable()) {
+            misTapasRest = ApiUtils.getService();
+        } else {
+            Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+        }
+
+        btnMapaAdd = root.findViewById(R.id.btnMapaAdd);
         btnMapaAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,11 +177,7 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
             }
         });
 
-
-
-
-
-
+        pintarBares();
 
 
         return root;
@@ -216,12 +230,17 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
 
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService
+                (Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     /**
      * Metodo para guardar la ruta del usuario
      */
-
-
-
 
 
     private void situarCamaraMapa() {
@@ -262,8 +281,6 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
     }
 
 
-
-
     // Obtenermos y leemos directamente el GPS
     private void obtenerPosicion() {
         try {
@@ -295,7 +312,6 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
 
     // Para dibujar el marcador actual
     private void marcadorPosicionActual() {
-
 
 
         // Borramos el arcador actual si está puesto
@@ -366,8 +382,6 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
     }
 
 
-
-
     @Override
     public void onLocationChanged(Location location) {
         handleNewLocation(location);
@@ -422,5 +436,53 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
+    }
+
+
+
+
+    private void pintarBares() {
+        int id = BdController.selectIdUser(getContext());
+
+        Log.e("cargarDatos ", "asda" + id);
+
+
+        Call<ArrayList<Bar>> call = misTapasRest.findAllBares(String.valueOf(id));
+        call.enqueue(new Callback<ArrayList<Bar>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Bar>> call, Response<ArrayList<Bar>> response) {
+                //Log.e("ERROR: ", "asda");
+                if (response.isSuccessful()) {
+                    bares = response.body();
+
+                    for (int i = 0; i < bares.size(); i++) {
+                        Log.e("relle ", "asda" + bares.get(i).getNombre());
+                        LatLng pos = new LatLng(bares.get(i).getLatitud(), bares.get(i).getLongitud());
+                        BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(base64ToBitmap(bares.get(i).getImagen()));
+                        mMap.addMarker(new MarkerOptions()
+                                // Posición
+                                .position(pos)
+                                // Título
+                                .title(bares.get(i).getNombre())
+                                // Subtitulo
+                                .snippet(String.valueOf(bares.get(i).getEstrellas()) + " estrellas")
+                                // Color o tipo d icono
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                        );
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Bar>> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+                //Toast.makeText( , "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private Bitmap base64ToBitmap(String b64) {
+        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 }
