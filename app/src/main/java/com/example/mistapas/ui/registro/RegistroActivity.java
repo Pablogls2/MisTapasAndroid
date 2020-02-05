@@ -33,7 +33,7 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText etRegistroPsw;
     private EditText etRegistroConfirPsw;
 
-    private boolean existente=false;
+    private boolean existente = false;
 
 
     @Override
@@ -46,33 +46,15 @@ public class RegistroActivity extends AppCompatActivity {
 
         this.btnRegistroAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
-                Usuario u=null;
-                if(comprobarEmail(etRegistroEmail.getText().toString())){
+                Usuario u = null;
+                if (comprobarEmail(etRegistroEmail.getText().toString())) {
+                    etRegistroEmail.setBackgroundResource(R.drawable.normal_et);
                     etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
-                    if(etRegistroConfirPsw.getText().toString().equals(etRegistroPsw.getText().toString())){
-                        u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
+                    if (etRegistroConfirPsw.getText().toString().equals(etRegistroPsw.getText().toString())) {
+                        u = new Usuario(etRegistroUsuario.getText().toString(), etRegistroNombre.getText().toString(), etRegistroEmail.getText().toString(), etRegistroPsw.getText().toString());
                         salvarUsuario(u);
-
-                        etRegistroConfirPsw.setBackgroundResource(R.drawable.normal_et);
-                        etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
-                       /* u = new Usuario(etRegistroUsuario.getText().toString(),etRegistroNombre.getText().toString(),etRegistroEmail.getText().toString(),etRegistroPsw.getText().toString());
-                        salvarUsuario(u);*/
-                        if(!existente){
-
-
-                            //volver al login
-                            //Intent intent = new Intent(RegistroActivity.this, ActividadLogin.class);
-                            //startActivity(intent);
-                        }else {
-                            Toast.makeText(getApplicationContext(),"USUARIO REPETIDO ",Toast.LENGTH_SHORT).show();
-                        }
-
-
-
-                    }else{
-
+                    } else {
                         etRegistroConfirPsw.setError("No coinciden");
                         etRegistroConfirPsw.setText("");
                         etRegistroConfirPsw.setBackgroundResource(R.drawable.error_et);
@@ -80,13 +62,9 @@ public class RegistroActivity extends AppCompatActivity {
 
                     }
                 }else{
-                    etRegistroEmail.setError("Email no valido");
-                    etRegistroConfirPsw.setBackgroundResource(R.drawable.error_et);
+                    etRegistroEmail.setError("Email erroneo");
+                    etRegistroEmail.setBackgroundResource(R.drawable.error_et);
                 }
-
-
-
-
             }
         });
 
@@ -99,22 +77,21 @@ public class RegistroActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
-    public  void iniciarVista(){
-        this.btnRegistroAceptar= findViewById(R.id.btnRegistroRegistrar);
-        this.btnRegistroVolver= findViewById(R.id.btnRegistroVolver);
-        this.etRegistroUsuario= findViewById(R.id.etRegistroUsuario);
-        this.etRegistroEmail= findViewById(R.id.etRegistroEmail);
-        this.etRegistroConfirPsw= findViewById(R.id.etRegistroConfirm);
-        this.etRegistroNombre= findViewById(R.id.etRegistroNombre);
-        this.etRegistroPsw= findViewById(R.id.etRegistroPass);
+    public void iniciarVista() {
+        this.btnRegistroAceptar = findViewById(R.id.btnRegistroRegistrar);
+        this.btnRegistroVolver = findViewById(R.id.btnRegistroVolver);
+        this.etRegistroUsuario = findViewById(R.id.etRegistroUsuario);
+        this.etRegistroEmail = findViewById(R.id.etRegistroEmail);
+        this.etRegistroConfirPsw = findViewById(R.id.etRegistroConfirm);
+        this.etRegistroNombre = findViewById(R.id.etRegistroNombre);
+        this.etRegistroPsw = findViewById(R.id.etRegistroPass);
     }
 
     /**
      * Salva un producto mediante RESR
+     *
      * @param p Producto a salvar
      */
     private void salvarUsuario(Usuario p) {
@@ -125,21 +102,22 @@ public class RegistroActivity extends AppCompatActivity {
             // Si todo ok
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(RegistroActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(RegistroActivity.this, "Usuario repetido", Toast.LENGTH_LONG).show();
                 }
             }
+
             // Si error
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e("cositas","Error: "+ t.getMessage());
+                Log.e("cositas", "Error: " + t.getMessage());
             }
         });
     }
 
-    private boolean comprobarEmail(String email){
+    private boolean comprobarEmail(String email) {
 
         // Patrón para validar el email
         Pattern pattern = Pattern
