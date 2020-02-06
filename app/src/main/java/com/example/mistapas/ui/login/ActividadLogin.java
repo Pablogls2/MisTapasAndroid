@@ -49,9 +49,7 @@ public class ActividadLogin extends AppCompatActivity {
 
     EditText etLoginUser, etLoginPass;
     Button btnLoginMostrarPass, btnLoginRegistro, btnLoginEntrar;
-    RelativeLayout relativeLayout;
     private boolean esVisible;
-    ImageView imagen;
     private MisTapasRest misTapasRest;
 
 
@@ -63,7 +61,7 @@ public class ActividadLogin extends AppCompatActivity {
         iniciarVista();
 
     }
-
+//Inicia la vista
     public void iniciarVista(){
 
         etLoginUser =(EditText)findViewById(R.id.etLoginUsu);
@@ -79,7 +77,7 @@ public class ActividadLogin extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
         }
-
+//Muestra la contraseña del usuario
         btnLoginMostrarPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +118,7 @@ public class ActividadLogin extends AppCompatActivity {
             }
         });
     }
-
+//Comprobamos la conexion
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) this.getSystemService
@@ -130,7 +128,7 @@ public class ActividadLogin extends AppCompatActivity {
     }
 
 
-
+//buscamos el usuario que tenga el login y el password introducidos, mediante rest
     private void buscarUsuario(){
         Call<Usuario> call = misTapasRest.findUser(etLoginUser.getText().toString(),etLoginPass.getText().toString());
         Toast toast = Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_LONG);

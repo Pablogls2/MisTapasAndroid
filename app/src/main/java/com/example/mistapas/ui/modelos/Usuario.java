@@ -36,6 +36,7 @@ public class Usuario {
     @Expose
     private String token;
 
+    //Constructores
     public Usuario() {
     }
 
@@ -50,7 +51,7 @@ public class Usuario {
 
 
 
-
+//Getter & Setters
     public int getId() {
         return id;
     }

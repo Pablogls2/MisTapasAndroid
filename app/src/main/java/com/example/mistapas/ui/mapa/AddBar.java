@@ -79,10 +79,6 @@ public class AddBar extends Fragment {
         AddBar f = new AddBar();
         f.setArguments(b);
         return f;
-
-
-
-
     }
 
 
@@ -144,7 +140,7 @@ public class AddBar extends Fragment {
         return root;
     }
 
-
+//Iniciamos la vista
     public void iniciarVista(){
         ivAddImagen= (ImageView) root.findViewById(R.id.ivAddImagen);
         etAddTitulo = root.findViewById(R.id.etAddNombre);
@@ -157,19 +153,6 @@ public class AddBar extends Fragment {
 
 
     }
-
-    public static byte[] getBytesFromBitmap(Bitmap bitmap) {
-        if (bitmap!=null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            return stream.toByteArray();
-        }
-        return null;
-    }
-
-
-
-
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("FOTO", "Opción::--->" + requestCode);
@@ -227,17 +210,7 @@ public class AddBar extends Fragment {
 
         }
     }
-
-    private ByteArrayOutputStream comprimirImagen(Bitmap myBitmap) {
-        // Stream de binario
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        // Seleccionamos la calidad y la trasformamos y comprimimos
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 75, bytes);
-        return bytes;
-    }
-
-
-
+//Mostramos el dialogo foto para escoger entre galeria o camara
     private void mostrarDialogoFoto(){
         AlertDialog.Builder fotoDialogo= new AlertDialog.Builder(getContext());
         fotoDialogo.setTitle("Seleccionar Acción");
@@ -260,7 +233,7 @@ public class AddBar extends Fragment {
                 });
         fotoDialogo.show();
     }
-
+//Elegmiso la foto de la galeria
     public void elegirFotoGaleria() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -297,7 +270,7 @@ public class AddBar extends Fragment {
         return null;
     }
 
-
+//Tomamos la foto de la camara
     private void tomarFotoCamara() {
         // Si queremos hacer uso de fotos en aklta calidad
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -374,7 +347,7 @@ public class AddBar extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
+//Salvamos el bar mediante servicio res introduciendolo en la base de datos
     private void salvarBar(Bar b) {
         // Llamamos al metodo de crear
 

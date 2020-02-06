@@ -16,17 +16,16 @@ public interface MisTapasRest {
     Call<List<Usuario>> findALlUser();
 
     //Obtener usuario
-    // GET: por definir direccion
+    // GET: http://80.102.108.57:5555/app/login/admin/admin
     @GET("login/{nick}/{psw}")
     Call<Usuario> findUser(@Path("nick") String nick,@Path("psw") String psw);
 
     //Obtener usuario
-    // GET: por definir direccion
+    // GET: http://80.102.108.57:5555/app/comproRegistro/admin
     @GET("comproRegistro/{nick}")
     Call<Usuario>  comproUser(@Path("nick") String nick);
 
     // Crear un usuario
-    //POST:
     @POST("registro")
     Call<Usuario> create(@Body Usuario user);
 
@@ -35,6 +34,7 @@ public interface MisTapasRest {
     Call<Bar> create(@Body Bar bar);
 
     //ListarBares
+    //GET:http://80.102.108.57:5555/app/listBar/3
     @GET("listBar/{idUsuario}")
     Call<ArrayList<Bar>> findAllBares(@Path("idUsuario") String idUsuario);
 
@@ -47,6 +47,7 @@ public interface MisTapasRest {
     Call<Bar> deleteBar(@Path("id") int id);
 
     //comprobamos el token
+    //GET:http://80.102.108.57:5555/app/comproToken/a6f22e72ff206ac859af869ffe6eee26
     @GET("comproToken/{token}")
     Call<Usuario>  comproToken(@Path("token") String token);
 

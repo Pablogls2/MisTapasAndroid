@@ -42,7 +42,7 @@ public class BdController extends SQLiteOpenHelper {
         //Se crea la nueva versión de la tabla
         db.execSQL(sqlCreate);
     }
-
+//Seleccionamos el token de la base de datos
     public static  String  selectToken(Context c) {
         String token="";
         BdController Login = new BdController(c, "Login", null, 1);
@@ -53,7 +53,6 @@ public class BdController extends SQLiteOpenHelper {
             Cursor cur = bd.rawQuery(" SELECT configuracion  FROM Login", null);
             //Nos aseguramos de que existe al menos un registro
             if (cur.moveToFirst()) {
-                //Recorremos el cursor hasta que no haya más registros y se llena la lista de juegos
                 token = cur.getString(0);
 
             }
@@ -63,7 +62,7 @@ public class BdController extends SQLiteOpenHelper {
 
         return token;
     }
-
+//Insertamos los datos en la bd
     public  static void insertarData(Context c,String id_disp, String token , int id_user) {
         //Abrimos la base de datos  en modo escritura
         BdController Login = new BdController(c, "Login", null, 1);
@@ -73,7 +72,7 @@ public class BdController extends SQLiteOpenHelper {
             try {
                 bd.execSQL("DELETE FROM Login");
 
-                //insertamos el juego recibido con su id
+                //insertamos el login recibido con su id
                 bd.execSQL("INSERT INTO Login (id_disp  , configuracion , id_user   ) " +
                         "VALUES ('" + id_disp + "','" +token+ "', " + id_user +  ")");
 
@@ -85,7 +84,7 @@ public class BdController extends SQLiteOpenHelper {
         }
     }
 
-
+//Seleccionamos el identificador del usuario
     public static  int selectIdUser(Context c) {
         int id = 0;
         BdController Login = new BdController(c, "Login", null, 1);

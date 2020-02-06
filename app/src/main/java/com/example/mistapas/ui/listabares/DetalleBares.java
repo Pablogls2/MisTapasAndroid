@@ -57,7 +57,7 @@ public class DetalleBares extends Fragment {
         iniciarVista(root);
         return root;
     }
-
+//Iniciamos la vista
     private void iniciarVista(View root) {
         ivDetalleImagen = (ImageView) root.findViewById(R.id.ivDetalleImagen);
         tvDetalleNombre = root.findViewById(R.id.tvDetalleNombre);
@@ -87,7 +87,7 @@ public class DetalleBares extends Fragment {
             }
         });
     }
-
+//Mostramos el dialog de borrar
     private void showDialogBorrar(final int id){
         AlertDialog.Builder borrarDialog= new AlertDialog.Builder(getContext());
         borrarDialog.setTitle("ATENCIÓN! ¿QUIERES BORRAR EL BAR?");
@@ -100,8 +100,12 @@ public class DetalleBares extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                borrarBar(bar.getId());
-                                getActivity().onBackPressed();
+                                if(isNetworkAvailable()) {
+                                    borrarBar(bar.getId());
+                                    getActivity().onBackPressed();
+                                }else{
+                                    Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+                                }
                                 break;
                             case 1:
                                 break;
@@ -110,7 +114,7 @@ public class DetalleBares extends Fragment {
                 });
         borrarDialog.show();
     }
-
+//Borramos el bar mediante rest
     private void borrarBar(int id) {
         // Llamamos al servicio a eliminar
         Call<Bar> call = misTapasRest.deleteBar(id);
@@ -128,11 +132,12 @@ public class DetalleBares extends Fragment {
             }
         });
     }
-
+//Pasamos de base64 a bitmap
     private Bitmap base64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
+    //Menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_flecha_back, menu);

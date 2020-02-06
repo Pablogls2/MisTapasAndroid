@@ -14,13 +14,4 @@ public class ClienteRetrofit {
         }
         return retrofit;
     }
-
-    public static Retrofit getBares(String url){
-        if(retrofit == null){
-            retrofit = new Retrofit.Builder().baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
 }

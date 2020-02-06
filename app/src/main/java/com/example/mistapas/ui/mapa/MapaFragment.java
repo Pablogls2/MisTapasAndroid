@@ -385,18 +385,13 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
         }
 
     }
-
+//Pintamos los bares recogdos mediante rest
     private void pintarBares() {
         int id = BdController.selectIdUser(getContext());
-
-        Log.e("cargarDatos ", "asda" + id);
-
-
         Call<ArrayList<Bar>> call = misTapasRest.findAllBares(String.valueOf(id));
         call.enqueue(new Callback<ArrayList<Bar>>() {
             @Override
             public void onResponse(Call<ArrayList<Bar>> call, Response<ArrayList<Bar>> response) {
-                //Log.e("ERROR: ", "asda");
                 if (response.isSuccessful()) {
                     bares = response.body();
 

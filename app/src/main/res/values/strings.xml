@@ -10,14 +10,13 @@
     <string name="registro_nombre">Nombre:</string>
     <string name="title_lista">Lista de Bares</string>
     <string name="login_entrar">Login</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="btnRegistroRegistrar">Registrar</string>
     <string name="btnRegistroVolver">Volver</string>
     <string name="btnMapaAdd">Añadir</string>
     <string name="tvAddEstrellas">Estrellas</string>
     <string name="tvAddTapas">Tapas</string>
     <string name="tvAddNombre">Nombre:</string>
-    <string name="btnAddAñadir">añadir</string>
+    <string name="btnAddAñadir">Añadir</string>
     <string name="titulo_splash">MIS TAPAS</string>
     <string name="text_Home">Bienvenido a Mis Tapas</string>
     <string name="detalle_borrar">Borrar</string>

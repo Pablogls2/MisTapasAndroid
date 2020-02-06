@@ -15,4 +15,13 @@
     <string name="title_mapa">Map</string>
     <string name="titulo_splash">MY TAPAS</string>
     <string name="text_Home">Welcome to My Tapas</string>
+    <string name="btnAddAñadir">Add</string>
+    <string name="btnMapaAdd">Add</string>
+    <string name="detalle_borrar">Delete</string>
+    <string name="tvAddEstrellas">Rate</string>
+    <string name="tvAddNombre">Name:</string>
+    <string name="tvAddTapas">Tapas</string>
+    <string name="tvDetalleEstrellas">Rate:</string>
+    <string name="tvDetalleNombre">Nombre:</string>
+    <string name="tvDetalleTapas">Tapas:</string>
 </resources>

@@ -48,7 +48,7 @@ public class Bar implements Serializable {
     @SerializedName("imagen")
     @Expose
     private String imagen;
-
+//Constructores
     public Bar(String nombre, Double latitud, Double longitud, int estrellas,String tapas,String imagen ,int idUsuario ) {
         this.nombre = nombre;
         this.latitud = latitud;
@@ -83,6 +83,7 @@ public class Bar implements Serializable {
                 '}';
     }
 
+    //Getters & Setters
     public String getTapas() {
         return tapas;
     }

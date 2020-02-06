@@ -48,7 +48,7 @@ public class RegistroActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
         }
         iniciarVista();
-
+//Funcion del boton registrar
         this.btnRegistroAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +76,7 @@ public class RegistroActivity extends AppCompatActivity {
                 }
             }
         });
-
+//Funcion del boton volver
         this.btnRegistroVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +87,7 @@ public class RegistroActivity extends AppCompatActivity {
 
 
     }
-
+//Comprobamos la conexion
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) this.getSystemService
@@ -95,7 +95,7 @@ public class RegistroActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
+//Iniciamos la vista
     public void iniciarVista() {
         this.btnRegistroAceptar = findViewById(R.id.btnRegistroRegistrar);
         this.btnRegistroVolver = findViewById(R.id.btnRegistroVolver);
@@ -106,15 +106,11 @@ public class RegistroActivity extends AppCompatActivity {
         this.etRegistroPsw = findViewById(R.id.etRegistroPass);
     }
 
-    /**
-     * Salva un producto mediante RESR
-     *
-     * @param p Producto a salvar
-     */
-    private void salvarUsuario(Usuario p) {
+    //Guardamos el usuario en el servicio rest, le pasaremos el usuario
+    private void salvarUsuario(Usuario user) {
         // Llamamos al metodo de crear
 
-        Call<Usuario> call = misTapasRest.create(p);
+        Call<Usuario> call = misTapasRest.create(user);
         call.enqueue(new Callback<Usuario>() {
             // Si todo ok
             @Override
@@ -133,14 +129,13 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
     }
-
+//Metodo que nos comprueba el email con un pattern
     private boolean comprobarEmail(String email) {
 
         // Patrón para validar el email
         Pattern pattern = Pattern
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-//commit
 
         Matcher mather = pattern.matcher(email);
 
