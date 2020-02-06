@@ -114,7 +114,7 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-       btnMapaAdd= root.findViewById(R.id.btnMapaAdd);
+        btnMapaAdd= root.findViewById(R.id.btnMapaAdd);
         btnMapaAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

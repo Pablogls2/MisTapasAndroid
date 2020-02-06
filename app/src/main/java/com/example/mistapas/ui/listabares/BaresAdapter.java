@@ -35,6 +35,7 @@ public class BaresAdapter  extends RecyclerView.Adapter<BaresAdapter.ViewHolder>
     }
 
 
+
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.bar, parent, false);

@@ -43,6 +43,8 @@ public class BdController extends SQLiteOpenHelper {
         db.execSQL(sqlCreate);
     }
 
+
+
     public  static void insertarData(Context c,String id_disp, String token , int id_user) {
         //Abrimos la base de datos  en modo escritura
         BdController Login = new BdController(c, "Login", null, 1);
