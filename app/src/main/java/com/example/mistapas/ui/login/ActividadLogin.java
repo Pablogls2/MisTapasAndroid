@@ -103,7 +103,12 @@ public class ActividadLogin extends AppCompatActivity {
         btnLoginEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarUsuario();
+                if(isNetworkAvailable()) {
+                    buscarUsuario();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -137,7 +142,6 @@ public class ActividadLogin extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Usuario user = response.body();
                     if(user != null){
-
                          String android_id = Settings.Secure.getString(getContentResolver(),
                                 Settings.Secure.ANDROID_ID);
                         Date currentTime = Calendar.getInstance().getTime();

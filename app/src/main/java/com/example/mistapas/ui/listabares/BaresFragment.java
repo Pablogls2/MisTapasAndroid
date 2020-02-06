@@ -55,7 +55,7 @@ public class BaresFragment extends Fragment {
     private Spinner spnBaresFiltro;
     private RecyclerView recyclerView;
     private String[] listaFiltro =
-            {"Filtros", "Ordenar por nombre ascendente", "Ordenar por nombre descendente","Ordenar por estrellas ascendente","Ordenar por estrellas descendente"};
+            {"Filtros:", "Ordenar por nombre ascendente", "Ordenar por nombre descendente","Ordenar por estrellas ascendente","Ordenar por estrellas descendente"};
     private SwipeRefreshLayout srlBaresRefresh;
     private BaresAdapter adapter;
     private MisTapasRest misTapasRest;
@@ -74,6 +74,11 @@ public class BaresFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.lista_bares, container, false);
+        iniciarFragment(root);
+        return root;
+    }
+//iniciamos la vista del fragment bar
+    private void iniciarFragment(View root){
         recyclerView = (RecyclerView) root.findViewById(R.id.rvBaresRecycler);
         pedirMultiplesPermisos();
         fabBaresVoz= root.findViewById(R.id.fabBaresVoz);
@@ -83,22 +88,22 @@ public class BaresFragment extends Fragment {
                 controlarVoz();
             }
         });
-
+//Comprobamos la conexion
         if(isNetworkAvailable()) {
             misTapasRest = ApiUtils.getService();
+            cargarDatos();
+            //gestionamos el spinner
+            gestionFiltrosSpinner(root);
+
+            iniciarSwipeVertical(root);
         }else{
             Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
         }
+//cargamos datos
 
-        cargarDatos();
-        gestionSpinner(root);
-
-        iniciarSwipeVertical(root);
-
-        return root;
     }
-
-    private void gestionSpinner(View root) {
+//Gestionamos el spinner de filtros
+    private void gestionFiltrosSpinner(View root) {
         this.spnBaresFiltro = root.findViewById(R.id.spinner2);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, listaFiltro);
         spnBaresFiltro.setAdapter(dataAdapter);
@@ -154,17 +159,14 @@ public class BaresFragment extends Fragment {
                         tipoFiltro = NADA;
                         break;
                 }
-                // Listamos los lugares y cargamos el recycler
-                //listarLugares();
             }
-            // Probar a quitar si puedes ;)
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //No hace nada,
+                //llamadita 2.0
             }
         });
     }
-
+//iniciamos el swipe vertical
     public void iniciarSwipeVertical(View root){
         srlBaresRefresh = (SwipeRefreshLayout) root.findViewById(R.id.srfBaresRefresh);
         srlBaresRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -173,14 +175,12 @@ public class BaresFragment extends Fragment {
                 srlBaresRefresh.setColorSchemeResources(R.color.colorAccent);
                 srlBaresRefresh.setProgressBackgroundColorSchemeResource(R.color.backIcon);
                 // Volvemos a cargar los datos
-                //String[] plataformas = {"Filtrar por:","Por nombre ascendente", "Por nombre descendente", "Por precio ascendente", "Por precio descendente","Por plataforma ascendente","Por plataforma descendente","Por fecha ascendente","Por fecha descendente"};
-                //spnJuegoFiltro.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, plataformas));
                 cargarDatos();
 
             }
         });
     }
-
+//Comprueba la conexion
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getActivity().getSystemService
@@ -188,17 +188,18 @@ public class BaresFragment extends Fragment {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
+//Cargamos los datos del servicio rest
     private void cargarDatos(){
         int id = BdController.selectIdUser(getContext());
         Call<ArrayList<Bar>> call = misTapasRest.findAllBares(String.valueOf(id));
         call.enqueue(new Callback<ArrayList<Bar>>() {
             @Override
             public void onResponse(Call<ArrayList<Bar>> call, Response<ArrayList<Bar>> response) {
-                //Log.e("ERROR: ", "asda");
+                //si encuentra bares
                 if(response.isSuccessful()){
                     listaBares =  response.body();
                     FragmentManager fm = getFragmentManager();
+                    //creamos el adaptador
                     adapter = new BaresAdapter (listaBares, getContext(),fm);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
@@ -215,9 +216,8 @@ public class BaresFragment extends Fragment {
             }
         });
     }
-
+//Ordenamos los bares segun el tipo de filtro que hallamos utilizado
     private void ordenarBares() {
-
         switch (tipoFiltro) {
             case NADA:
                 //Collections.sort(this.bares, (Bar l1, Bar l2) -> l1.getId().co);
@@ -238,11 +238,11 @@ public class BaresFragment extends Fragment {
                 break;
         }
     }
-
+//Controlamos el filtro de voz
     private void controlarVoz() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        //reconoce en el idioma del telefono
+        //reconocemos el idioma del telefono
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "¿Cómo quieres ordenar los bares?");
         try {
@@ -293,7 +293,7 @@ public class BaresFragment extends Fragment {
 
         }
     }
-
+//Analizamos el filtro de voz para comprobar lo que pide el usuario
     private void analizarFiltroVoz(String secuencia) {
         // Nombre
         if ((secuencia.contains("nombre")) &&
@@ -315,7 +315,7 @@ public class BaresFragment extends Fragment {
             tipoFiltro = NADA;
         }
     }
-
+//Pedimos los permisos
     private void pedirMultiplesPermisos(){
         // Indicamos el permisos y el manejador de eventos de los mismos
         Dexter.withActivity(this.getActivity())

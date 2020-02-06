@@ -1,6 +1,9 @@
 package com.example.mistapas.ui.registro;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,15 +36,17 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText etRegistroPsw;
     private EditText etRegistroConfirPsw;
 
-    private boolean existente = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_activity);
-        misTapasRest = ApiUtils.getService();
 
+        if(isNetworkAvailable()) {
+            misTapasRest = ApiUtils.getService();
+        }else{
+            Toast.makeText(getApplicationContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+        }
         iniciarVista();
 
         this.btnRegistroAceptar.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +58,11 @@ public class RegistroActivity extends AppCompatActivity {
                     etRegistroPsw.setBackgroundResource(R.drawable.normal_et);
                     if (etRegistroConfirPsw.getText().toString().equals(etRegistroPsw.getText().toString())) {
                         u = new Usuario(etRegistroUsuario.getText().toString(), etRegistroNombre.getText().toString(), etRegistroEmail.getText().toString(), etRegistroPsw.getText().toString());
-                        salvarUsuario(u);
+                        if(isNetworkAvailable()) {
+                            salvarUsuario(u);
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         etRegistroConfirPsw.setError("No coinciden");
                         etRegistroConfirPsw.setText("");
@@ -77,6 +86,14 @@ public class RegistroActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) this.getSystemService
+                (Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     public void iniciarVista() {

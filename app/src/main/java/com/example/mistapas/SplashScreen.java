@@ -27,7 +27,9 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        //comprobamos conexion
         if(isNetworkAvailable()) {
+            //obtenemos servicio
             misTapasRest = ApiUtils.getService();
         }else{
             Toast.makeText(getApplicationContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
@@ -36,22 +38,26 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-
-
+                //Recogemos el token de sqlite
                 String token_sqLite = BdController.selectToken(getBaseContext());
+                //Si no existe token entrara al login
                 if (token_sqLite.equals("")) {
                     Intent intent = new Intent(SplashScreen.this, ActividadLogin.class);
                     startActivity(intent);
+                    //Si existe lo buscamos
                 } else {
-                    buscarToken(token_sqLite);
+                    if(isNetworkAvailable()) {
+                        buscarToken(token_sqLite);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 
             }
         }, 4000);
     }
-
+//metodo que comprueba la conexion a internet
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) this.getSystemService
@@ -60,16 +66,17 @@ public class SplashScreen extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-
+//metodo que busca token mediante la conexion rest
     private void buscarToken(String tok) {
         Call<Usuario> call = misTapasRest.comproToken(tok);
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                //Si encuentra el token accede a la main activity directamente
                 if (response.isSuccessful()) {
                     Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(intent);
-
+                //Si encuentra un token distinto accede al login
                 } else {
                     Intent intent = new Intent(SplashScreen.this, ActividadLogin.class);
                     startActivity(intent);

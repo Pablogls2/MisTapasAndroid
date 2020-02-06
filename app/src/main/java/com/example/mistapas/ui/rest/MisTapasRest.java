@@ -38,10 +38,6 @@ public interface MisTapasRest {
     @GET("listBar/{idUsuario}")
     Call<ArrayList<Bar>> findAllBares(@Path("idUsuario") String idUsuario);
 
-    //recoger bares con filtro
-    @GET("listBar/{idUsuario}/{nombre}")
-    Call<List<Bar>> findFiltroBares();
-
     //update del token
     @PUT("updateTok/{id}")
     Call<Usuario> update(@Path ("id") int id, @Body Usuario user);

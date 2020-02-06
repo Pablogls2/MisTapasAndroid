@@ -42,7 +42,7 @@ public class BaresAdapter  extends RecyclerView.Adapter<BaresAdapter.ViewHolder>
         return viewHolder;
     }
 
-
+//Creamos la vista de la lista
     public void onBindViewHolder(ViewHolder holder, final int position) {
         String stars="";
         final Bar bar = (Bar) lista.get(position);
@@ -73,13 +73,13 @@ public class BaresAdapter  extends RecyclerView.Adapter<BaresAdapter.ViewHolder>
             }
         });
     }
-
+//Metodo que pasa de base 64 a bitmap
     private Bitmap base64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
-
+//obtenemos el size de la lista
     public int getItemCount() {
         return lista.size();
     }

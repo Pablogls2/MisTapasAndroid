@@ -106,6 +106,7 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
 
         if(isNetworkAvailable()) {
             misTapasRest = ApiUtils.getService();
+            pintarBares();
         }else{
             Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
         }
@@ -126,7 +127,7 @@ public class MapaFragment extends Fragment implements  OnMapReadyCallback, Googl
 
             }
         });
-        pintarBares();
+
         return root;
     }
 

@@ -25,6 +25,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        iniciarVista(root);
+        return root;
+    }
+//Iniaciamos la vista a mostrar
+    private void iniciarVista(View root){
         ivHomeSalir = root.findViewById(R.id.ivHomeLogout);
         ivHomeSalir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +42,5 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        return root;
     }
 }

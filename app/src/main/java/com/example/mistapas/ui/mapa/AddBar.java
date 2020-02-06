@@ -2,9 +2,12 @@ package com.example.mistapas.ui.mapa;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -95,7 +98,11 @@ public class AddBar extends Fragment {
                              @Nullable Bundle savedInstanceState) {
          root = inflater.inflate(R.layout.fragment_add_bar, container, false);
 
-        misTapasRest = ApiUtils.getService();
+        if(isNetworkAvailable()) {
+            misTapasRest = ApiUtils.getService();
+        }else{
+            Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+        }
         iniciarVista();
         Bundle b=getArguments();
         Double latitud=b.getDouble("latitud");
@@ -121,8 +128,13 @@ public class AddBar extends Fragment {
                     Toast.makeText(getActivity(), "¡Por favor rellena todos los campos!", Toast.LENGTH_SHORT).show();
                 }else {
                    int id= BdController.selectIdUser(getContext());
-                      Bar b = new Bar(etAddTitulo.getText().toString(), latitud, longitud,spAddSpinner.getSelectedItem().toString().length(),etAddTapas.getText().toString(),bitmapToBase64(imagenTransformada),id);
-                      salvarBar(b);
+                    if(isNetworkAvailable()) {
+                        Bar b = new Bar(etAddTitulo.getText().toString(), latitud, longitud,spAddSpinner.getSelectedItem().toString().length(),etAddTapas.getText().toString(),bitmapToBase64(imagenTransformada),id);
+                        salvarBar(b);
+                    }else{
+                        Toast.makeText(getContext(), "Es necesaria una conexión a internet", Toast.LENGTH_SHORT).show();
+                    }
+
 
                     }
                 }
@@ -386,6 +398,13 @@ public class AddBar extends Fragment {
                 Log.e("ERROR: ", t.getMessage());
             }
         });
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService
+                (Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }
