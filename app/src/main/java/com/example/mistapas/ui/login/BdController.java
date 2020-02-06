@@ -54,7 +54,6 @@ public class BdController extends SQLiteOpenHelper {
             //Nos aseguramos de que existe al menos un registro
             if (cur.moveToFirst()) {
                 token = cur.getString(0);
-
             }
             //Cerramos la base de datos
             bd.close();
@@ -95,7 +94,6 @@ public class BdController extends SQLiteOpenHelper {
             Cursor cur = bd.rawQuery(" SELECT id_user  FROM Login", null);
             //Nos aseguramos de que existe al menos un registro
             if (cur.moveToFirst()) {
-                //Recorremos el cursor hasta que no haya más registros y se llena la lista de juegos
                 id = cur.getInt(0);
 
             }
